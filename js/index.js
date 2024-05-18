@@ -1,3 +1,5 @@
+console.log(a);
+
 const name = "Artem";
 
 //1)ключове слово
@@ -32,12 +34,56 @@ console.log(boolean);
 console.log(typeof boolean);
 
 // конкатиннація - зшивання строк
+// інтерполяція - ``
+
+const fr = "idlkalkaklsdmlasmdl";
+
+const n = 10;
+
+// typeof - дозволяє визначити тип данних
+console.log(typeof n);
+
+const isNull = null;
+//
+const undef = undefined;
+//
+console.log(typeof o);
+
+console.log(`"${fr}"`);
+
 console.log(number);
 
-alert("Все пропало, все погано, все упало");
+// alert("Все пропало, все погано, все упало");
 
-const message = confirm("Чи згодні ви?");
-console.log(message);
+// const message = confirm("Чи згодні ви?");
+// console.log(message);
 
-const asdas = prompt("Введи свій нік");
-console.log(asdas);
+// const asdas = prompt("Введи свій нік");
+// console.log(asdas);
+
+var a = 10;
+
+a = 10;
+
+// const as = BigInt(128390182309182093812000);
+
+// Symbol
+
+const button = document.querySelector("#button");
+
+button.addEventListener("click", () => {
+  //   alert("дякую вам за замовлення");
+  //   const review = confirm("Чи вам сподобалось?");
+  //     console.log(review);
+  const a = prompt("Введіть імʼя");
+  console.log(a);
+  // .length - довжина
+  // a.length = довжина строки а
+  if (a.length >= 2) {
+    alert("Все успішно ви молодець");
+  } else if (a.length <= 170) {
+    alert("Все ок");
+  } else {
+    alert("Введіть коректне імʼя");
+  }
+});

@@ -87,3 +87,26 @@ button.addEventListener("click", () => {
     alert("Введіть коректне імʼя");
   }
 });
+// if else - якщо - інакше
+
+// const message = confirm("Чи підтверджуєте ви що вам більше 18 років?");
+
+// if відпрацьовує тільки в випадку коли в круглих дужках true
+
+// якщо if === true тоді відпрацьовує блок if
+// якщо if === false тоді відпрацьовує блок else
+// !==
+// if (message) {
+//   console.log("Дякуєм за підтвердження");
+// } else {
+//   console.log("Приходьте пізніше");
+// }
+
+alert("Дія небезпечна");
+const alertConfirm = confirm("Дія небезпечна, чи хочете ви продовжувати?");
+
+if (alertConfirm) {
+  alert("Дякую");
+} else {
+  alert("Відміна");
+}

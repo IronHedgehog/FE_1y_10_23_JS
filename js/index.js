@@ -1,112 +1,71 @@
-console.log(a);
+// Оператори
+// Математичні
+// + - * / %
+//  * - Множення
+//  / - поділити
+// console.log(2 + 2); // 4
+// console.log(5 - 3); // 2
+// console.log(2 * 2); // 4
+// console.log(4 / 2); // 2
 
-const name = "Artem";
+// // % - залишок від ділення
+// console.log(5 % 2); // ?
 
-//1)ключове слово
-// 2) Назва вашої змінної
-// 3) = оператор присвоєння
-// 4) значення
+// console.log(10 % 5); // 0
+// console.log(11 % 5); // 1
 
-const hobby = "Грати";
-console.log(hobby);
-//перше слово з маленької, всі інші починаються з великої
-const veryLongNameHere = "";
+//  в 5 влазить 2 рази по 2
 
-// const - яку не можна змінювати або перевизначати в майбутньому
-// let - не обовʼязково давати значення одразу
-// ви мижете змінювати його нижче у коді безліч разів
+const number = 10;
 
-let age;
-console.log(age);
+// number % 2 - залишок від ділення числа яке зберігається у змінній number на 2
+// якщо цей залишок дорівнює 0
 
-// age = 20;
-
-// age = 200;
-
-const string = "afnasdonfkasndkfnaowenfoawneofnownfownf";
-console.log(typeof string);
-const number = 40;
-console.log(typeof number);
-// true = - правда
-// false - не правда
-const boolean = true || false;
-console.log(boolean);
-console.log(typeof boolean);
-
-// конкатиннація - зшивання строк
-// інтерполяція - ``
-
-const fr = "idlkalkaklsdmlasmdl";
-
-const n = 10;
-
-// typeof - дозволяє визначити тип данних
-console.log(typeof n);
-
-const isNull = null;
-//
-const undef = undefined;
-//
-console.log(typeof o);
-
-console.log(`"${fr}"`);
-
-console.log(number);
-
-// alert("Все пропало, все погано, все упало");
-
-// const message = confirm("Чи згодні ви?");
-// console.log(message);
-
-// const asdas = prompt("Введи свій нік");
-// console.log(asdas);
-
-var a = 10;
-
-a = 10;
-
-// const as = BigInt(128390182309182093812000);
-
-// Symbol
-
-const button = document.querySelector("#button");
-
-button.addEventListener("click", () => {
-  //   alert("дякую вам за замовлення");
-  //   const review = confirm("Чи вам сподобалось?");
-  //     console.log(review);
-  const a = prompt("Введіть імʼя");
-  console.log(a);
-  // .length - довжина
-  // a.length = довжина строки а
-  if (a.length >= 2) {
-    alert("Все успішно ви молодець");
-  } else if (a.length <= 170) {
-    alert("Все ок");
-  } else {
-    alert("Введіть коректне імʼя");
-  }
-});
-// if else - якщо - інакше
-
-// const message = confirm("Чи підтверджуєте ви що вам більше 18 років?");
-
-// if відпрацьовує тільки в випадку коли в круглих дужках true
-
-// якщо if === true тоді відпрацьовує блок if
-// якщо if === false тоді відпрацьовує блок else
-// !==
-// if (message) {
-//   console.log("Дякуєм за підтвердження");
+// number % 2 === 0 - залишок від ділення на 2 має суворо дорівнювати числу  0
+// if (number % 2 === 0) {
+//   console.log("число кратне 2");
 // } else {
-//   console.log("Приходьте пізніше");
+//   console.log("число не кратне");
 // }
+// = - присвоювання a =5,
+// Порівняльні
 
-alert("Дія небезпечна");
-const alertConfirm = confirm("Дія небезпечна, чи хочете ви продовжувати?");
+// порівнюємо за значення == (майже не використовується)
+console.log(2 == "2"); // true
+// порівняння == за значенням === за типом данних
+console.log(2 === "2"); // false
 
-if (alertConfirm) {
-  alert("Дякую");
-} else {
-  alert("Відміна");
-}
+// ! - не - змінює значення на протилежне
+// console.log(2 !== 2); //  false
+// console.log(2 !== 4); // true
+// //  > ,<, <=, >=
+
+// console.log(5 > 2); // true
+// console.log(2 < 5); // true
+// console.log(5 <= 2); // false
+// console.log(5 >= 2); // true
+
+const number1 = " 20"; // строка
+
+const number2 = undefined;
+// NaN - not a number - не число
+
+console.log(Number(number2));
+
+console.log(typeof number1);
+console.log(Number(number1));
+
+console.log(Number("5px")); // NaN
+console.log(Number.parseInt("5.2px")); //  parseInt - перебири та знайди ціле число - integer // 5
+console.log(Number.parseFloat("5.2px")); // для дробових чисел
+console.log("object".length);
+
+// Перевірка на число
+
+const normalNum = Number("50");
+// ! - не
+console.log(!Number.isNaN(normalNum)); // false
+
+const badNum = Number("ans5"); // NaN
+
+console.log(!Number.isNaN(badNum)); // true

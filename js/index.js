@@ -1,71 +1,88 @@
-// Оператори
-// Математичні
-// + - * / %
-//  * - Множення
-//  / - поділити
-// console.log(2 + 2); // 4
-// console.log(5 - 3); // 2
-// console.log(2 * 2); // 4
-// console.log(4 / 2); // 2
+const name = "                   Artem is here                      ";
+const nameLength = name.trim().length;
 
-// // % - залишок від ділення
-// console.log(5 % 2); // ?
+// .trim() - метод для обрізання пробілів перед буквами та після букв (метод)
+//
+//length - довжина (властивість)
+console.log(name);
+console.log(nameLength);
 
-// console.log(10 % 5); // 0
-// console.log(11 % 5); // 1
+const string = "shoc";
+// s = 0
+// h = 1
+//0 = 2
+// c = 3
 
-//  в 5 влазить 2 рази по 2
+const stringLength = string.length; // 4
 
-const number = 10;
+const string2 = name + string;
 
-// number % 2 - залишок від ділення числа яке зберігається у змінній number на 2
-// якщо цей залишок дорівнює 0
+console.log(string2.length - 1);
 
-// number % 2 === 0 - залишок від ділення на 2 має суворо дорівнювати числу  0
-// if (number % 2 === 0) {
-//   console.log("число кратне 2");
-// } else {
-//   console.log("число не кратне");
-// }
-// = - присвоювання a =5,
-// Порівняльні
+const string3 = "ABC" + name + "CBA" + " " + "BAC"; // Конкатенація
+const string4 = `ABC CBA, ${name}  ,BAC`; // інтерполяція
 
-// порівнюємо за значення == (майже не використовується)
-console.log(2 == "2"); // true
-// порівняння == за значенням === за типом данних
-console.log(2 === "2"); // false
+console.log(string3);
+console.log(string4);
 
-// ! - не - змінює значення на протилежне
-// console.log(2 !== 2); //  false
-// console.log(2 !== 4); // true
-// //  > ,<, <=, >=
+console.log(string2);
 
-// console.log(5 > 2); // true
-// console.log(2 < 5); // true
-// console.log(5 <= 2); // false
-// console.log(5 >= 2); // true
+const string5 = "SaLe";
 
-const number1 = " 20"; // строка
+const postCard = "sAlE";
+if (postCard.toLowerCase() === "sale") {
+  console.log(postCard.toLowerCase());
+  console.log(postCard.toUpperCase());
+  console.log("Піймали та видалили спам");
+}
 
-const number2 = undefined;
-// NaN - not a number - не число
+const string6 = "s i x";
+console.log(string6.indexOf(" ")); // -1
+console.log(string6.indexOf("S")); //чутливий до регістру
+console.log(string6.indexOf("x")); // 0
+// indexOf() - повертає індекс символа у рядку
+// -1 - index то індекс який повертається якщо нічого не знайдено
+// indexOF()- оперує тільки числами
+// indexOf - чутливий до регістру
+// Знаходить тільки перше співпадіння
 
-console.log(Number(number2));
+const string7 = "String";
+// Чи включає змінна string7 у себе ВЕЛИКУ літеру S?
+console.log(string7.includes("string"));
 
-console.log(typeof number1);
-console.log(Number(number1));
+// includes() - повертає true або false
+// чутливий до регістру
 
-console.log(Number("5px")); // NaN
-console.log(Number.parseInt("5.2px")); //  parseInt - перебири та знайди ціле число - integer // 5
-console.log(Number.parseFloat("5.2px")); // для дробових чисел
-console.log("object".length);
+const string8 = "something.txt";
 
-// Перевірка на число
+// чи починається рядок в змінній string8 з вказаних символів?
+console.log(string8.startsWith("some"));
+// чи закінчується рядок в змінній string8 з вказаних символів?
+console.log(string8.endsWith(".txt"));
+// повертає true або false
 
-const normalNum = Number("50");
-// ! - не
-console.log(!Number.isNaN(normalNum)); // false
+const string9 =
+  "                A                                        R          ";
+// trim() - видаляє пробіли на початку та вкінці рядка
+console.log(string9.trim());
 
-const badNum = Number("ans5"); // NaN
+const string10 = "String10";
 
-console.log(!Number.isNaN(badNum)); // true
+console.log(string10.padStart(2, "A"));
+// 2 56 37
+const hours = "5";
+
+console.log(hours.padStart(2, 0));
+
+// padStart (2)
+//padStart - перший параметр вказує на те скільки символів має бути у рядку
+// Якщо така кількість символів вже є то padStart поверне вам рядок з яким працює
+// Додає всі символи на початок рядка
+// padEnd;() - додає символи в кінець рядка
+console.log(string10.padEnd(20, "r"));
+
+console.log(`${string10}`);
+
+const user = "Yura";
+
+console.log(`Привіт, ${user}`); // інтерполяція

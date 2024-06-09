@@ -1,74 +1,91 @@
-// DOM - Дозволяє отримати доступ до HTML тегів та атрибутів та їх замінювати або проводити якісь інші дії
+// BOM
 
-// document - це наша HTML сторінка
+// const language = navigator.language || navigator.userAgent;
+// console.log(language);
 
-const navButton = document.querySelector(".nav-button");
-// достатньо популярні
-// document.getElementById();
-// отримує HTML елемент за його ID
-// document.getElementsByClassName();
-// отримує HTML елементи за його class
-// Популярні
-// document.querySelector();
-// Дозволяє вам отримати доступ до HTML тегу за будь-якою ознакою
-// .querySelector() - якщо багато співпадінь, знайде тільки перший збіг
-
-// ознака - id,class,атрибут, тег
-// document.querySelectorAll();
-// querySelectorAll(); - знаходить всі елементи з однаковою ознакою
-
-console.log(navButton);
-
-// textContent - звертається до текстового наповнення HTML елементу
-navButton.textContent = "ТОвару немає";
-
-// Щоб отримати доступ до будь-якого HMTL елемента ми маємо використати один з методів наведених вище (зазвичай querySelector())
-const input = document.querySelector(".input");
-console.log(input.value);
-//.value - це html атрибут тегу input який зберігає значення input
-//  <input class="checkbox" type="checkbox" />
-const checkbox = document.querySelector(".checkbox");
-checkbox.checked = true;
-
-const img = document.getElementById("img");
-img.src = "../img/flower.jpg";
-
-// const navBar = document.querySelector(".header-nav");
-
-// document.body - до тегу body можна звернутись напряму через документ
-// JS
-
-document.body.style.backgroundColor = "darkblue";
-// CSS
-// body {
-// backgroundColor: darkblue
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(
+//     (position) => {
+//       console.log(position);
+//       const { longtitude, latidude } = position.coords;
+//     },
+//     (error) => {
+//       console.log(error.message);
+//     }
+//   );
+// } else {
+//   console.log("Геолокація не підтримується");
 // }
 
-const dark = document.querySelector(".dark");
-const white = document.querySelector(".white");
+// const browserInfo = `Браузер ${navigator.appCodeName} , ${navigator.appVersion} `;
 
-// dark.addEventListener("click", darkTheme);
-// white.addEventListener("click", whiteTheme);
+// console.log(browserInfo);
 
-// function darkTheme(e) {
-//   document.body.style.backgroundColor = "darkblue";
-// }
+const form = document.getElementById("form");
 
-// function whiteTheme(e) {
-//   document.body.style.backgroundColor = "white";
-// }
+const input1 = document.querySelector(".input1");
 
-// classList - список класів
-// add - додати
-white.classList.add("something");
-// remove - видалити
-white.classList.remove("something");
-console.log(white.classList);
-// toggle - працює в обидві сторони може додати та видалити
-white.classList.toggle("something");
-// contains - чи включає класліст такий клас?
-white.classList.contains("asasdasdasd");
-console.log(white.classList.contains("somasdasdething"));
+const input2 = document.querySelector(".input2");
 
-// events 5
-// if else switch case 6
+const button = document.getElementById("click");
+
+// 1. Все що ви робите на сайті це події про які браузер сигналить постійно але ми їх не обробляємо
+//2. Щоб відслухати подію на конкретному елементі ми маємо отримати доступ до цього елемента
+//3. Додати на цей елемент слухча події (addEventListener)
+
+// addEventListener -додає слухач події
+button.addEventListener("click", onClick);
+let counter = 0;
+
+// onClick() - обробник події
+function onClick(event) {
+  // target - Властивість яка повертає HTML-тег на якому відбулась подія
+  //currentTarget - властивість яка повертає HTML-тег на якому стоїть обробник події (addEventListener)
+  console.log(event.target);
+  console.log(event.currentTarget);
+  counter += 1;
+  if (counter === 3) {
+    console.log("Подихайте трохи");
+    button.removeEventListener("click", onClick);
+    setTimeout(() => {
+      button.addEventListener("click", onClick);
+    }, 2000);
+  }
+
+  console.log("Я молодець, я клацнув по кнопці");
+  // removeEventListener - видаляє слухач події
+}
+
+// input - подія вводу тексту
+// submit - подія відправки форми
+form.addEventListener("input", onInput);
+
+function onInput(event) {
+  // target - конкретно той елемент на якому відбулась подія
+  //   console.log("target: ", event.target.value);
+
+  //form.elements - дитячі елементи форми
+  //ми проіменували за допомогою атрибуту name всі дитячі поля(input1,input2)
+  // отримали значення через .value
+  const input1Value = form.elements.input1.value;
+  const input2Value = form.elements.input2.value;
+
+  console.log(form.elements);
+  console.log(input2Value);
+
+  const concatValue = input1Value + input2Value;
+  form.elements.button.textContent = concatValue;
+  // const input2Value
+  // currentTarget - завжди той елемент на якому висить addEventListener
+  //   console.log("currentTarget: ", event.currentTarget);
+}
+
+//
+
+//events
+//--submit
+//--change
+//--input
+//--focus
+//--blur
+//--click

@@ -58,6 +58,7 @@ function onClick(event) {
 
 // input - подія вводу тексту
 // submit - подія відправки форми
+//--input
 form.addEventListener("input", onInput);
 
 function onInput(event) {
@@ -83,11 +84,43 @@ function onInput(event) {
 //
 
 //events
-//--submit
-//--change
-//--input
-//--focus
-//--blur
+//--submit // відправка форми
+form.addEventListener("submit", onSubmit);
+
+function onSubmit(e) {
+  // Коли ми з вами відправляємо форму то дія форми за замовчуванням це оновити сторінку
+  e.preventDefault(); // Відключення перезавантаження сторінки при відправці форми (відключення ,буд-яких, дій які відбуваються за замовчуванням при цій події)
+
+  console.log("Форма відправилась");
+}
+
+//--change // подія для радіо кнопок,чекбоксів
+
+const check = document.getElementById("checkbox");
+
+check.addEventListener("change", onChange);
+
+function onChange(e) {
+  console.log(e.target.checked);
+}
+
+//--focus // стан коли ми тицьнули на інтерактивний елемент
+
+input1.addEventListener("focus", onFocus);
+
+function onFocus(e) {
+  console.log(e);
+  input1.style.borderColor = "green";
+}
+
+//--blur // втрата контакту з інтерактивним елементом
+input1.addEventListener("blur", onBlur);
+function onBlur(e) {
+  if (e.target.value.length < 5) {
+    input1.style.borderColor = "red";
+  }
+  // input1.style.color = "black";
+}
 //--click
 
 // 1)Написати скрипт відкриття та закриття модального вікна по кнопці.

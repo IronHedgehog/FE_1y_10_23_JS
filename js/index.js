@@ -1,151 +1,77 @@
-// BOM
+// якщо щось трапилось я зроблю те що ти написав у фігурних дужках
+// якщо в круглих дужках буде true то відпрацює те шо ви написали у фігурних дужках далі
 
-// const language = navigator.language || navigator.userAgent;
-// console.log(language);
+//якщо в круглих дужках ми отримуємо false то управління переходить в блок else якщо його немає то if не виконується і код продовжує виконуватись
 
-// if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(
-//     (position) => {
-//       console.log(position);
-//       const { longtitude, latidude } = position.coords;
-//     },
-//     (error) => {
-//       console.log(error.message);
-//     }
-//   );
-// } else {
-//   console.log("Геолокація не підтримується");
-// }
+const age = 15;
 
-// const browserInfo = `Браузер ${navigator.appCodeName} , ${navigator.appVersion} `;
+const auth = true;
 
-// console.log(browserInfo);
+// && - Логічний оператор І, мають виконуватись обидві вимоги
 
-const form = document.getElementById("form");
+// || - логічний оператор АБО, має виконатись хоча б одна умова
 
-const input1 = document.querySelector(".input1");
+//  ! - Логічне НЕ
 
-const input2 = document.querySelector(".input2");
+console.log(true && true && false);
+console.log(false || true || true || false);
+console.log((false && true) || true || false);
 
-const button = document.getElementById("click");
-
-// 1. Все що ви робите на сайті це події про які браузер сигналить постійно але ми їх не обробляємо
-//2. Щоб відслухати подію на конкретному елементі ми маємо отримати доступ до цього елемента
-//3. Додати на цей елемент слухча події (addEventListener)
-
-// addEventListener -додає слухач події
-button.addEventListener("click", onClick);
-let counter = 0;
-
-// onClick() - обробник події
-function onClick(event) {
-  // target - Властивість яка повертає HTML-тег на якому відбулась подія
-  //currentTarget - властивість яка повертає HTML-тег на якому стоїть обробник події (addEventListener)
-  console.log(event.target);
-  console.log(event.currentTarget);
-  counter += 1;
-  if (counter === 3) {
-    console.log("Подихайте трохи");
-    button.removeEventListener("click", onClick);
-    setTimeout(() => {
-      button.addEventListener("click", onClick);
-    }, 2000);
-  }
-
-  console.log("Я молодець, я клацнув по кнопці");
-  // removeEventListener - видаляє слухач події
+if (age >= 18 || auth === true) {
+  console.log("робе");
+} else {
+  console.log("не робе");
 }
 
-// input - подія вводу тексту
-// submit - подія відправки форми
-//--input
-form.addEventListener("input", onInput);
+// Будь-який switch можна замінити на блок if elseif else
+//switch - використовуємо в рідких випадках
 
-function onInput(event) {
-  // target - конкретно той елемент на якому відбулась подія
-  //   console.log("target: ", event.target.value);
+const user = 51;
 
-  //form.elements - дитячі елементи форми
-  //ми проіменували за допомогою атрибуту name всі дитячі поля(input1,input2)
-  // отримали значення через .value
-  const input1Value = form.elements.input1.value;
-  const input2Value = form.elements.input2.value;
+const silver = 100;
+const gold = 200;
+const diamond = 500;
+const bronze = 50;
 
-  console.log(form.elements);
-  console.log(input2Value);
+// case - це якась подія
 
-  const concatValue = input1Value + input2Value;
-  form.elements.button.textContent = concatValue;
-  // const input2Value
-  // currentTarget - завжди той елемент на якому висить addEventListener
-  //   console.log("currentTarget: ", event.currentTarget);
+switch (user) {
+  case bronze:
+    console.log("bronze підписка");
+    break;
+  case silver:
+    console.log("silver підписка");
+    break;
+  case gold:
+    console.log("gold підписка");
+    break;
+  case diamond:
+    console.log("diamond підписка");
+    break;
+  default:
+    console.log("Купіть підписку");
+    break;
 }
 
-//
+console.log("шось далі");
 
-//events
-//--submit // відправка форми
-form.addEventListener("submit", onSubmit);
+const user1 = "author";
 
-function onSubmit(e) {
-  // Коли ми з вами відправляємо форму то дія форми за замовчуванням це оновити сторінку
-  e.preventDefault(); // Відключення перезавантаження сторінки при відправці форми (відключення ,буд-яких, дій які відбуваються за замовчуванням при цій події)
+const author = "author";
+const read_only = "user";
+const admin = "admin";
 
-  console.log("Форма відправилась");
+switch (user1) {
+  case author:
+    console.log("Ти можеш додати якийсь контент");
+    break;
+  case read_only:
+    console.log("Ти можеш переглядати якийсь контент");
+    break;
+  case admin:
+    console.log("Ти можеш редагувати якийсь контент, модерувати сайт");
+    break;
+  default:
+    console.log(" Зарструйтесь, будь ласка");
+    break;
 }
-
-//--change // подія для радіо кнопок,чекбоксів
-
-const check = document.getElementById("checkbox");
-
-check.addEventListener("change", onChange);
-
-function onChange(e) {
-  console.log(e.target.checked);
-}
-
-//--focus // стан коли ми тицьнули на інтерактивний елемент
-
-input1.addEventListener("focus", onFocus);
-
-function onFocus(e) {
-  console.log(e);
-  input1.style.borderColor = "green";
-}
-
-//--blur // втрата контакту з інтерактивним елементом
-input1.addEventListener("blur", onBlur);
-function onBlur(e) {
-  if (e.target.value.length < 5) {
-    input1.style.borderColor = "red";
-  }
-  // input1.style.color = "black";
-}
-//--click
-
-// 1)Написати скрипт відкриття та закриття модального вікна по кнопці.
-
-// 2)Використовуючи попередній код написати скрипт закриття модального вікна по кліку на бекдроп
-
-// 3)Напиши скрипт в якому є три радіобатони зі значенями кольрів. При обиранніна будь якого колір фону боді змінюється відповідно
-
-// 4) Напиши скрипт який, при наборі тексту в інпут input#name-input (подія input), підставляє його поточне значення в span#name-output. якщо інпут порожній, в спані повинен відображатися рядок 'незнайомець'.
-
-// 5)Напиши скрипт, який би при втраті фокуса на інпут, перевіряв його вміст на правильну кількість символів.
-
-// Скільки символів має бути в інпут, вказується в його атрибуті data-length.
-// Якщо введена відповідна кількість, то border інпут стає зеленим,   якщо неправильне - червоним.
-// Для додавання стилів, використовуй CSS-класи valid і invalid.
-// #validation-input {
-//   border: 3px solid #bdbdbd;
-// }
-
-// #validation-input.valid {
-//   border-color: #4caf50;
-// }
-
-// #validation-input.invalid {
-//   border-color: #f44336;
-// }
-
-// 6. Напиши скрипт, який реагує на зміну значення input#font-size-control (подія input) і змінює інлайн-стиль span#text оновлюючи властивість font-size. В результаті при перетягуванні повзунка змінюватиметься розмір тексту.

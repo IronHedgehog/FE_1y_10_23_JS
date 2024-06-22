@@ -55,23 +55,73 @@ switch (user) {
 
 console.log("шось далі");
 
-const user1 = "author";
+// const user1 = "author";
+
+// const author = "author";
+// const read_only = "user";
+// const admin = "admin";
+
+// switch (user1) {
+//   case author:
+//     console.log("Ти можеш додати якийсь контент");
+//     break;
+//   case read_only:
+//     console.log("Ти можеш переглядати якийсь контент");
+//     break;
+//   case admin:
+//     console.log("Ти можеш редагувати якийсь контент, модерувати сайт");
+//     break;
+//   default:
+//     console.log(" Зарструйтесь, будь ласка");
+//     break;
+// }
+
+// Питання по дз - розберем
+
+// Додатки (error lens,toggle quotes,random everything,regexp snippet)
+
+// Запам'ятайте 6 хибних (falsy) значень, які приводять до false в логічному перетворенні: 0, NaN, null, undefined, порожній рядок: "" або '', false. Абсолютно все інше приводиться до true.
+
+// if (0 || NaN || null || undefined || "" || false) {
+// } else {
+// }
+
+// Будь-який switch можна замінити на блок if elseif else (відпрацювати)
+
+const user1 = "user";
 
 const author = "author";
 const read_only = "user";
 const admin = "admin";
 
-switch (user1) {
-  case author:
-    console.log("Ти можеш додати якийсь контент");
-    break;
-  case read_only:
-    console.log("Ти можеш переглядати якийсь контент");
-    break;
-  case admin:
-    console.log("Ти можеш редагувати якийсь контент, модерувати сайт");
-    break;
-  default:
-    console.log(" Зарструйтесь, будь ласка");
-    break;
+if (user1 === author) {
+  console.log("Ти можеш додати якийсь контент");
+} else if (user1 === read_only) {
+  console.log("Ти можеш переглядати якийсь контент");
+} else if (user1 === admin) {
+  console.log("Ти адмін");
+} else {
+  console.log("Неіснуюча роль");
 }
+
+// Тернарний оператор (Скорочує синтаксис) (Потрібний для простих операцій)
+
+const age1 = 17;
+
+// age1 >= 18  - умова яка може справдитись а може і неспрвадитись
+// ? - Ми запитує у JS чи умова вірно виконанана?
+// Одразу після знаку питання ви пишите код який має відпрацювати якщо умова виконана (true)
+//після коду ставимо двокрапку вона буде розділяти true та false
+//після двокрапки записується реакція на false значення перевірки
+const isAdult = age1 >= 18 ? true : false;
+
+console.log(isAdult);
+// Кахут
+
+// Області бачення
+
+const a = 2;
+
+// const string = ;
+
+const name = "Jean";

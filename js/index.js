@@ -116,6 +116,7 @@ const age1 = 17;
 const isAdult = age1 >= 18 ? true : false;
 
 console.log(isAdult);
+
 // Кахут
 
 // Області бачення
@@ -125,3 +126,41 @@ const a = 2;
 // const string = ;
 
 const name = "Jean";
+
+const age2 = 20;
+
+//age2 >= 21
+const canDrink = age2 >= 21 ? "так" : "Ні";
+
+console.log(canDrink);
+
+if (age2 >= 21) {
+  console.log("Так");
+} else {
+  console.log("Ні");
+}
+
+//НЕ ЗЛОВЖИВАТИ
+const score = 50;
+
+const grade = score >= 90 ? "A" : score >= 80 ? "B" : score >= 70 ? "C" : "D";
+
+console.log(grade);
+
+const temperature = 25;
+
+const weather = temperature > 18 ? "Телпо" : "Холодно";
+
+console.log(weather);
+
+const value = -3;
+
+const getAbsoluteValue = value < 0 ? value * -1 : value;
+
+console.log(getAbsoluteValue);
+
+const name1 = "asmd;lmas;l";
+
+const greeting = `Привіт, ${name1 === "Artem" ? "Наш друг" : "Незнайомець"}`;
+
+console.log(greeting);

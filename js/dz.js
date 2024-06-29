@@ -1,55 +1,19 @@
-// 1)Не розумію щодо eventlistener як зрозуміти на що це вішати,
-//  2)а також чи треба робити два івента на одній формі(наприклад, submit та input)
+//   The issue in your code is related to the logic of the if and else if statements. The conditions are being checked in a way that once a condition is true, it will execute the corresponding block and skip the rest. This causes incorrect evaluations. Specifically, the problem lies in the ordering of the else if statements. Let's correct this:
+// Fix the order of conditions: Ensure that the age ranges do not overlap incorrectly. For instance, the current order means that an age of 15 will be evaluated as a child because it only checks if age > 0 before it checks if age > 13.
+// if (ageValue > 0) {
+//   text8.textContent("Ти дитина");
+// } else if (ageValue > 13) {
+//   text8.textContent("Ти підліток");
+// } else if (ageValue > 20) {
+//   text8.textContent("Ти дорослий");
+// } else if (ageValue > 65) {
+//   text8.textContent("Йой, ти вже пенсіонер");
+// } else {
+//   text8.textContent("Щось пішло не за планом");
+// }
 
-const form = document.getElementById("form");
+//
 
-form.addEventListener("submit", onSubmit);
-
-function onSubmit(e) {
-  e.preventDefault(); // запобігти діям браузеру за замовчуванням
-
-  // form.elements - всі елементи форми
-
-  // .toLowerCase() - до нижнього регістру
-  //.trim() - зрізає пробіли з початку та кінця рядка
-  const day = form.elements.day.value.trim().toLowerCase();
-
-  switch (day) {
-    case "понеділок":
-      console.log("День робочий");
-      break;
-    case "вівторок":
-      console.log("День робочий");
-      break;
-    case "середа":
-      console.log("День робочий");
-      break;
-    case "четвер":
-      console.log("День робочий");
-      break;
-    case "пʼятниця":
-      console.log("День робочий");
-      break;
-    case "субота":
-      console.log("День вихідний");
-      break;
-    case "неділя":
-      console.log("День вихідний");
-      break;
-
-    default:
-      console.log("Це не день тижня");
-      break;
-  }
-
-  const email = form.elements.email.value;
-  const password = form.elements.password.value;
-
-  if (password.length > 6) {
-    console.log("це пароль");
-  } else {
-    console.log("Спробуйте шось вигадать краще за qwerty");
-  }
-}
-
-// Створити розмітку з полем введення, що приймає рядок та кнопкою. При натисканні на кнопку перевіряти, чи введений рядок є днем тижня (наприклад: "понеділок", "вівторок" і т.д.), виводити відповідне повідомлення про робочий день або вихідний.
+// Вибір способу оплати (switch case та тернарний оператор):
+// Напишіть функцію, яка приймає спосіб оплати(готівка, кредитна картка, PayPal) і суму.Поверніть повідомлення про комісію: 0 % для готівки, 2 % для кредитної картки, 3 % для PayPal.
+// Використайте switch case для вибору способу оплати та тернарний оператор для визначення, чи потрібно додавати слово "комісія" до відповіді.

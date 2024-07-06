@@ -183,3 +183,30 @@ for (let i = 0; i <= 50; i++) {
 }
 
 //break(lottery , Redirect ), continue(парні не парні)
+
+// array - назва (Масив)
+
+const numbers = [1, 2, 3, 4, 5];
+
+for (let i = 1; i < numbers.length; i++) {
+  const element = numbers[i];
+  if (i === 25) {
+    console.log("тут 25 будинок");
+  }
+}
+
+// ІНдекси рахуються з 0
+console.log(numbers[numbers.length - 1]);
+// Створити скрипт, який виводить на екран всі числа , які менші за n. Якщо зустрічається число, що більше або дорівнює n, цикл повинен бути закінчений за допомогою break.
+
+const n = 100;
+let i = 1;
+
+while (i < n) {
+  i++;
+  if (i <= 10) {
+    console.log(i);
+  } else {
+    break;
+  }
+}

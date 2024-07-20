@@ -13,3 +13,39 @@
 // 7 ***)Створіть масив чисел та змінну з числовим значенням.Використайте цикл for та метод push(), щоб створити новий масив без елементів, що дорівнюють змінній з числовим значенням.
 
 // 8***)Створіть два масиви чисел. Використайте цикли та умовні оператори, щоб знайти спільні елементи цих масивів та створити новий масив з цими елементами.
+
+let comparedArray = [];
+const nonComparedArray1 = [];
+const nonComparedArray2 = [];
+for (let i = 0; i < 8; i++) {
+  // різні рандомні масиви створює
+  nonComparedArray1[i] = Math.floor(Math.random() * 21);
+  nonComparedArray2[i] = Math.floor(Math.random() * 21);
+}
+
+for (let i = 0; i < nonComparedArray1.length; i++) {
+  for (let j = 0; j < nonComparedArray2.length; j++) {
+    const elementspysok1 = nonComparedArray1[i];
+    const elementspysok2 = nonComparedArray2[j];
+    if (elementspysok1 === elementspysok2) {
+      if (comparedArray.includes(elementspysok1)) {
+        continue;
+      } else {
+        comparedArray.push(elementspysok1);
+      }
+    }
+  }
+}
+
+// for (let i = 0; i < nonComparedArray1.length; i++) {
+//   const elementspysok1 = nonComparedArray1[i];
+//   const elementspysok2 = nonComparedArray2[i];
+//   //   console.log(elementspysok1);
+//   //   console.log(elementspysok2);
+//   if (nonComparedArray1[i] === nonComparedArray2[i]) {
+//     comparedArray.push(nonComparedArray1[i]);
+//   }
+// }
+console.log(nonComparedArray1);
+console.log(nonComparedArray2);
+console.log(comparedArray);

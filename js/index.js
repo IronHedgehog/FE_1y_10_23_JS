@@ -1,89 +1,63 @@
-console.log(spaceChanger("  asd ", "?"));
-
-// function - функцію
-// spaceChanger - імʼя функції
-
-function spaceChanger(str, spaceChangerSymbol) {
-  const trimStr = str.trim();
-  const stringArr = trimStr.split(" ");
-  let string = "";
-
-  for (const character of stringArr) {
-    string += character + spaceChangerSymbol;
-  }
-  const split = string.split("");
-  split.pop();
-  string = split.join("");
-
-  return string;
-}
-
-console.log(spaceChanger("     Ми дуже любимо вивчати JS     ", "-"));
-console.log(spaceChanger("Ми написали класну функцію", "_"));
-
-// hoisting - всплиття
-
-const spaceChangerArrow = (str, spaceChangerSymbol) => {
-  const trimStr = str.trim();
-  const stringArr = trimStr.split(" ");
-  let string = "";
-
-  for (const character of stringArr) {
-    string += character + spaceChangerSymbol;
-  }
-  const split = string.split("");
-  split.pop();
-  string = split.join("");
-
-  return string;
+func("a");
+console.log(number);
+// Функція зворотнього виклику (callback) - Сама по собі не викликається, використовується у вигляді сервісів
+const printMessage = function (message) {
+  // console.log(message);
 };
 
-// => має вмонтований ретурн
-
-const plus = (a, b) => a + b;
-
-console.log(plus(1, 2));
-
-const a = 5;
-
-const arrowFunc = (a = 0, b = 0, c = 0, d = 0, e = 0, f = 0) => {
-  console.log("a :>> ", a);
-  console.log("b :>> ", b);
-  console.log("c :>> ", c);
-  console.log("d :>> ", d);
-  console.log("e :>> ", e);
-  console.log("f :>> ", f);
-  return a + b + c + d + e + f;
+// Вища фунція - функція,що приймає параметром іншу функцію
+const highOrderFunc = function (callback) {
+  const string = "asd";
+  callback(string);
 };
 
-console.log(arrowFunc(a, 4, 3, 2, 1, 0));
+// Виклик функції
+highOrderFunc(printMessage);
 
-console.log(arrowFunc(5));
+const button = document.getElementById("type");
 
-function signUp(userName = "Anonyms", email, password) {
-  //throw new Error - викинь екземляр класу Помилка
-  if (!email) throw new Error("Введи емейл");
-  if (!password) throw new Error("Введи пароль");
+button.addEventListener("click", onClickFunc);
 
-  console.log(arguments);
-  const arg = Array.from(arguments);
-
-  console.log(arg);
-  console.log(`Вітаю ви успішно зареєструвались ${userName}`);
+function onClickFunc(e) {
+  console.log("click");
 }
 
-signUp("Artem", "email@email.com", "Пароль");
+// for (let i = 0; i < 50; i++) {
+//   console.log(i);
+// }
 
-function plusFunc() {
-  const argArr = Array.from(arguments);
-  let sum = 0;
-
-  for (let i = 0; i < argArr.length; i++) {
-    sum += argArr[i];
+const repeatLog = function (n) {
+  for (let i = 0; i < n; i++) {
+    // console.log(i);
   }
-  return sum;
+};
+
+repeatLog(40);
+
+const array = [10, 21, 30, 41, 50, 61, 70, 81, 90, 101];
+// функцця вищого порядку
+const filter = function (array, test) {
+  const filteredArr = test(array);
+  return filteredArr;
+};
+// callback
+function testNumbers(array) {
+  const resultArr = [];
+  for (const element of array) {
+    if (element % 2 === 0) {
+      resultArr.push(element);
+    }
+  }
+  return resultArr;
 }
 
-console.log(
-  plusFunc(1, 2, 3, 4, 5, 6, 7, 7, 8, 88, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
-);
+filter(array, testNumbers);
+
+console.log(number);
+
+function func(a) {
+  console.log(a);
+}
+
+var number = "as;da";
+console.log(number);

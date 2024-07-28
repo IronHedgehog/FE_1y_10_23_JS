@@ -28,9 +28,11 @@ const isLoginUnique = function (allLogins, login) {
   return false;
 };
 
+// isLoginUnique(asdasd);   Колбек фунції - це сервісні функції
+
 const addLogin = function (allLogins, login) {
   if (isLoginValid(login) === true) {
-    if (isLoginUnique(login)) {
+    if (isLoginUnique(allLogins, login)) {
       allLogins.push(login);
       return "Ти молодець";
     } else {

@@ -1,164 +1,137 @@
-// 1) Лаконічний синтаксис
-
-function getPlus(a, b) {
-  return a + b;
-}
-
-// Стрілкова функція
-// => - має вмонтований return
-
-const ggPlus = () => console.log("a");
-const gggPlus = (a) => console.log(a);
-
-const plus = (a, b, c) => {
-  const sum = a + b + c;
-  return sum;
+const kryzka = {
+  _color: ["white", "blue"],
+  $volume: "500ml",
 };
 
-function getSum() {
-  console.log(arguments);
-  const array = Array.from(arguments);
-  // array
-}
-
-getSum(1, 2, 34, 5, 6, 7, 8, 9, 0);
-
-// rest & spread оператор (...)
-
-// ...arg - rest операція(операція збору усіх окремих елементів в один масив)
-const gPlus = (a, b, c, ...arg) => {
-  console.log(a, b, c);
-  console.log(arg);
-  // console.log(arguments); // arguments не існує
+const figurka = {
+  size: {
+    small: "250mm",
+    medium: "500mm",
+    big: "1m",
+  },
 };
 
-function register(name, password, email, validator) {
-  validator(name, password, email);
-  if (true) {
-    console.log("вітаю, ви зареєструвались");
-  }
-}
+const poster = {};
 
-function validator(
-  name,
-  password,
-  email,
-  isValidName,
-  isValidPassword,
-  isValidEmail
-) {
-  isValidName(name);
-  isValidPassword(password);
-  isValidEmail(email);
-  return true;
-}
+// Додавання властивостей відбувається через крапку
+poster.material = "paper";
 
-function isValidName(name) {
-  if (name.length < 6) {
-    console.log("нето");
-  }
-  return "то";
-}
+console.log(poster);
 
-function isValidPassword(password) {
-  if (password.length < 6) {
-    console.log("нето");
-  }
-  return "то";
-}
+// Отримати значення з обʼєкту
+console.log(poster.material);
+console.log((poster.size = "1m"));
+console.log(poster["material"]);
+console.log(poster);
 
-function isValidEmail(email) {
-  if (email.length < 6) {
-    console.log("нето");
-  }
-  return "то";
-}
+// Видалення властивостей
+delete poster.size;
 
-gPlus(1, 2, 3, 4, 56, 7, 8, 90, 12, 23, 4, 5, 5, 6, 77, 7, 88);
+// Заміна властивостей
 
-// Звичайна анонімка
-() => {
-  console.log("as");
+const figurk = {
+  size: "250mm",
 };
 
-// IIFE - функція яка миттево викликає сама себе
-(() => {
-  console.log("as");
-})();
+figurk.size = "2m";
 
-const input = document.getElementById("qwe");
+console.log(figurk);
 
-input.addEventListener("input", (e) => {
-  console.log(e);
-});
+console.log(poster);
 
-input.addEventListener("input", (e) => console.log(e));
+const objArr = [
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+  { material: "paper" },
+  { material: "iron" },
+  { material: "metal" },
+];
 
-function onInput(e) {
-  console.log(e);
-}
-
-//
-func("a");
-console.log(number);
-// Функція зворотнього виклику (callback) - Сама по собі не викликається, використовується у вигляді сервісів
-const printMessage = function (message) {
-  // console.log(message);
-};
-
-// Вища фунція - функція,що приймає параметром іншу функцію
-const highOrderFunc = function (callback) {
-  const string = "asd";
-  callback(string);
-};
-
-// Виклик функції
-highOrderFunc(printMessage);
-
-const button = document.getElementById("type");
-
-button.addEventListener("click", onClickFunc);
-
-function onClickFunc(e) {
-  console.log("click");
-}
-
-// for (let i = 0; i < 50; i++) {
-//   console.log(i);
-// }
-
-const repeatLog = function (n) {
-  for (let i = 0; i < n; i++) {
-    // console.log(i);
-  }
-};
-
-repeatLog(40);
-
-const array = [10, 21, 30, 41, 50, 61, 70, 81, 90, 101];
-// функцця вищого порядку
-const filter = function (array, test) {
-  const filteredArr = test(array);
-  return filteredArr;
-};
-// callback
-function testNumbers(array) {
-  const resultArr = [];
-  for (const element of array) {
-    if (element % 2 === 0) {
-      resultArr.push(element);
+function filter(objArr, material) {
+  const filteredArr = [];
+  for (const obj of objArr) {
+    if (obj.material === material) {
+      filteredArr.push(obj);
     }
   }
-  return resultArr;
+  return filteredArr;
 }
 
-filter(array, testNumbers);
+console.log(filter(objArr, "paper"));
 
-console.log(number);
+// short properties
 
-function func(a) {
-  console.log(a);
-}
+const email = "asd@asd.com";
+const password = "qwerty12345@&";
+const userName = "QWERTY";
 
-var number = "as;da";
-console.log(number);
+const user = {
+  email: email,
+  password: password,
+  userName: userName,
+};
+
+const user1 = {
+  email,
+  password,
+  userName,
+  registration: function () {
+    // this - це контекст
+    console.log(this);
+    console.log(user1.email, this.password, this.userName);
+  },
+  goWalk: function () {
+    console.log("Я пішов гулять");
+  },
+  up: function () {
+    console.log("up");
+  },
+  changeUserName: function (newUserName) {
+    if (email.length <= 6) {
+      return false;
+    }
+    this.userName = newUserName;
+  },
+};
+
+user1.registration();
+user1.goWalk();
+user1.changeUserName("Petro");
+
+console.log(user1);
+
+console.log(user);
+console.log(user1);
+
+const key = "shoc";
+
+const cosmetics = {
+  [key]: "shoci",
+};
+
+console.log(cosmetics);

@@ -3,40 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
   </head>
   <body>
-    <form id="form">
-      <input class="form-control" type="text" name="day" />
-      <input class="form-control" type="text" name="email" autocomplete="off" />
-      <input class="form-control" type="text" name="password" />
-      <button name="submit">Submit</button>
-    </form>
+    <div id="title"></div>
+    <div id="director"></div>
+    <div id="year"></div>
+    <div id="rating"></div>
 
-    <input id="qwe" type="text" />
+    <input autocomplete="off" id="deposit" type="number" /><input
+      id="withdraw"
+      type="text"
+    />
+    <button id="button-deposit">Покласти готівку</button
+    ><button id="button-withdraw">Зняти готівку</button>
 
-    <form class="form">
-      <label>
-        cash
-        <input type="radio" name="sposib" placeholder="cash" value="cash" />
-      </label>
-      <label
-        >credit card
-        <input
-          type="radio"
-          name="sposib"
-          placeholder="credit card"
-          value="credit card"
-        />
-      </label>
-      <label>
-        PayPal
-        <input type="radio" name="sposib" placeholder="PayPal" value="PayPal" />
-      </label>
-    </form>
-    <button id="type" type="submit">Відправити</button>
-    <script src="./js/index.js" type="module"></script>
+    <!-- <script src="./js/index.js" type="module"></script> -->
     <!-- <script src="./js/dzPlus.js"></script> -->
-    <!-- <script src="./js/DZ.js" type="module"></script> -->
+    <script src="./js/Dz.js" type="module"></script>
   </body>
 </html>

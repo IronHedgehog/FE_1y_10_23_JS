@@ -1,137 +1,95 @@
-const kryzka = {
-  _color: ["white", "blue"],
-  $volume: "500ml",
+const obj = {
+  name: "Artem",
+  age: 23,
+  city: "Kharkiv",
 };
 
-const figurka = {
-  size: {
-    small: "250mm",
-    medium: "500mm",
-    big: "1m",
-  },
+const copyObj = {
+  ...obj,
+  asd: "asd",
+  email: "asd@asd.com",
+  password: "qwerty12345@&",
 };
 
-const poster = {};
+// copyObj.email = "asd@asd.com";
+// copyObj.password = "qwerty12345@&";
 
-// Додавання властивостей відбувається через крапку
-poster.material = "paper";
+console.log(copyObj);
 
-console.log(poster);
-
-// Отримати значення з обʼєкту
-console.log(poster.material);
-console.log((poster.size = "1m"));
-console.log(poster["material"]);
-console.log(poster);
-
-// Видалення властивостей
-delete poster.size;
-
-// Заміна властивостей
-
-const figurk = {
-  size: "250mm",
+const obj1 = {
+  name: "Artem",
+  age: 23,
+  city: "Kharkiv",
 };
+// Складний тип даних (обʼєкт)
+// Адреса Фонатнова 6
+// Адреса Олексія 8
 
-figurk.size = "2m";
+// Всі складні типи даних порівнюються за адресою(посиланням на їх місце у Купі)
+console.log(obj === obj1);
 
-console.log(figurk);
+const asd = {
+  a: "B",
+};
+// Примітив
+const number = 5;
 
-console.log(poster);
+const arr = [1, 2, 3, 4, 5];
 
-const objArr = [
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-  { material: "paper" },
-  { material: "iron" },
-  { material: "metal" },
-];
+let result = 0;
 
-function filter(objArr, material) {
-  const filteredArr = [];
-  for (const obj of objArr) {
-    if (obj.material === material) {
-      filteredArr.push(obj);
-    }
-  }
-  return filteredArr;
+for (let i = 0; i < arr.length; i++) {
+  const element = arr[i];
+  console.log(element);
+  result += element;
 }
 
-console.log(filter(objArr, "paper"));
+console.log(result);
 
-// short properties
+// for (const key of obj) {
+//   console.log(key);
+// }
 
-const email = "asd@asd.com";
-const password = "qwerty12345@&";
-const userName = "QWERTY";
+// OBJECT IS NOT ITERABLE (NO)
 
-const user = {
-  email: email,
-  password: password,
-  userName: userName,
-};
+// MAGIC
 
-const user1 = {
-  email,
-  password,
-  userName,
-  registration: function () {
-    // this - це контекст
-    console.log(this);
-    console.log(user1.email, this.password, this.userName);
-  },
-  goWalk: function () {
-    console.log("Я пішов гулять");
-  },
-  up: function () {
-    console.log("up");
-  },
-  changeUserName: function (newUserName) {
-    if (email.length <= 6) {
-      return false;
-    }
-    this.userName = newUserName;
-  },
-};
+// for ... in
+for (const key in obj) {
+  console.log(key);
+  console.log(obj[key]);
+}
 
-user1.registration();
-user1.goWalk();
-user1.changeUserName("Petro");
+console.log("abc");
 
-console.log(user1);
+// Object.keys(), Object.values(), Object.entries()
 
-console.log(user);
-console.log(user1);
+// Object.keys(obj) - Повертає масив ключів обʼєкту
+console.log(Object.keys(obj));
+//Object.values() - повератає масив значень обʼєкту
+console.log(Object.values(obj));
+// Object.entries() - повертає матрицю(в кожному вкладеному масиві пара ключ значення)
+console.log(Object.entries(obj));
 
-const key = "shoc";
+// ...Spread(Розпилення)
 
-const cosmetics = {
-  [key]: "shoci",
-};
+// ...spread оператор для обʼєктів в основному необхідний для копіювання
+//Беремо обʼєкт і передаєм по черзі кожну властивість обʼєкту
+// 1) name: "Artem", перенесли це
+// 2)  age: 23,
+// 3) city: "Kharkiv",
+const object = { ...obj };
+const string = "asd";
+const string1 = "asd";
+const string3 = "obj";
+// Примітиви порівнюються та зберігаються за значеннями
+console.log(string === string1);
+// Обʼєкти та складні типи данних порівнюються за посиланням у памʼяті(купі)
+console.log(obj === string3);
 
-console.log(cosmetics);
+console.log(object);
+
+const arr1 = [1, 2, 3, 4, 5];
+const copyArr1 = [...arr1, 6, 7, 8, 9, 10];
+
+console.log(arr1 === copyArr1);

@@ -50,13 +50,16 @@ const account = {
       console.log("Додати 0 або менше 0 не можна");
       return;
     }
-    //  Метод відповідає за додавання суми до балансу.
-    this.balance += amount;
-    // Викликає createTransaction для створення об'єкта транзакції
+
     const depositTransaction = this.createTransaction(
       amount,
       Transaction.DEPOSIT
     );
+
+    //  Метод відповідає за додавання суми до балансу.
+    this.balance += amount;
+    // Викликає createTransaction для створення об'єкта транзакції
+
     // push - він дозволяє додати що передасте в масив
     //  після чого додає його в історію транзакцій
     this.transactions.push(depositTransaction);
@@ -81,13 +84,14 @@ const account = {
       );
       return;
     }
-
-    this.balance -= amount;
-    //  Викликає createTransaction для створення об'єкта транзакції
     const withdrowTransaction = this.createTransaction(
       amount,
       Transaction.WITHDRAW
     );
+
+    this.balance -= amount;
+    //  Викликає createTransaction для створення об'єкта транзакції
+
     // після чого додає його в історію транзакцій.
     this.transactions.push(withdrowTransaction);
   },

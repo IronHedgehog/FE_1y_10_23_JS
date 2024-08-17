@@ -1,126 +1,144 @@
-// Створіть об'єкт "movie" з властивостями "title", "director", "year", "rating". Додайте до об'єкту метод, який повертає "true", якщо рейтинг фільму вище 8, та "false", якщо рейтинг фільму 8 або нижче. Вивести значення властивостей на сторінку. Якщо метод повернув "true" то змінити колір тексту поля title на зелений.
+/*
+ * Типів транзацкій всього два.
+ * Можна покласти або зняти гроші з рахунку.
+ */
 
-const title = document.querySelector("#title");
-const director = document.getElementById("director");
-const year = document.getElementById("year");
-const rating = document.getElementById("rating");
-
-const movie = {
-  title: "DeadPool 2",
-  director: "ХТОСь",
-  year: 2018,
-  rating: 9,
-  checkRating() {
-    if (this.rating > 8) {
-      return true;
-    }
-    return false;
-  },
-};
-// Два способи отримати значення якогось з ключів
-// console.log(movie["title"]);
-// console.log(movie.title);
-// console.log(movie.checkRating());
-
-if (movie.checkRating()) {
-  //   title.style.color = "green";
-  title.classList.add("green");
-} else {
-  title.classList.remove("green");
-}
-title.textContent = movie.title;
-director.textContent = movie.director;
-year.textContent = movie.year;
-rating.textContent = movie.rating;
-
-// APPENDChild
-// Перебрати
-// створити елемент(тег)
-// Заповнити цей тег
-// Додати створений елемент на сторінку
-
-// Створіть об'єкт "bankAccount" з властивостями "ownerName", "accountNumber", "balance". Додайте до об'єкту метод "deposit", який дозволяє додавати гроші на рахунок, та метод "withdraw", який дозволяє знімати гроші з рахунку. Методи повинні зпрацьовувати при натисканні на кнопки “поповнити рахунок” та отримати ‘готівку’ відповідно. Після проведення операції виводити повідомлення про залишок на рахунку.
-
-const depositButton = document.getElementById("button-deposit");
-const withDrawButton = document.getElementById("button-withdraw");
-
-const bankAccount = {
-  ownerName: "Artem",
-  accountNumber: 123556,
-  balance: 2000,
-  deposit(money) {
-    if (money <= 0) {
-      throw new Error("Що відʼємні значення вводити не можна");
-    }
-    this.balance += money;
-  },
-  withdraw(money) {
-    if (money <= 0) {
-      throw new Error("Що відʼємні значення вводити не можна");
-    }
-    this.balance -= money;
-  },
+// Напиши сценарій керування особистим кабінетом інтернет-банку. Є об'єкт account в якому необхідно реалізувати методи для роботи з балансом та історією транзакцій.
+const Transaction = {
+  DEPOSIT: "deposit",
+  WITHDRAW: "withdraw",
 };
 
-// depositInput.addEventListener("input", (e) => {
-//   console.log(e.target.value);
-// });
+let randomId = Math.floor(Math.random() * 1000 + 1);
+/*
+ * Кожна транзакція - це об'єкт з властивостями: id, type і amount
+ */
 
-depositButton.addEventListener("click", (e) => {
-  const depositInput = Number(document.querySelector("#deposit").value);
-  //   const depositInput = document.querySelector("#deposit").value;
-  bankAccount.deposit(depositInput);
-  alert(`У вас на рахунку ${bankAccount.balance}`);
-});
+const account = {
+  // Поточний баланс рахунку
+  balance: 0,
 
-withDrawButton.addEventListener("click", (e) => {
-  const withdrawInput = Number(document.getElementById("withdraw").value);
-  // const withdrawInput = document.getElementById("withdraw");
-  console.log(withdrawInput);
-  bankAccount.withdraw(withdrawInput);
-  alert(`У вас на рахунку ${bankAccount.balance}`);
-});
+  // Історія транзакцій
+  transactions: [],
 
-// const inputForMoney = document.querySelector(".inputMoney");
-// const depositnaButton = document.querySelector(".depositButton");
-// const gotivkaButton = document.querySelector(".withdrawButton");
-// const bankAccount = {
-//   ownerName: "Vadymka",
-//   accountNumber: 123456789,
-//   balance: 7,
-//   deposit(valuesh) {
-//     this.balance += valuesh;
-//     console.log(`Залишок на балансі ${this.balance}`);
-//   },
-//   withdraw(valuesh) {
-//     this.balance -= valuesh;
-//     console.log(`Залишок на балансі ${this.balance}`);
-//   },
-// };
-// const withdrawFunc = function (e) {
-//   const value = Number(inputForMoney.value);
-//   bankAccount.withdraw(value);
-// };
-// gotivkaButton.addEventListener("click", withdrawFunc);
-// depositnaButton.addEventListener("click", (e) => {
-//   const value = Number(inputForMoney.value);
-//   bankAccount.deposit(value);
-// });
+  /*
+   * Метод створює і повертає об'єкт транзакції.
+   * Приймає суму і тип транзакції.
+   * Кожна транзакція - це об'єкт з властивостями: id, type і amount
+   */
+  createTransaction(amount, type) {
+    // id - має бути унікальним
+    // Метод створює
+    const transaction = {
+      amount,
+      type,
+      id: randomId,
+      // id: 1,
+    };
 
-const pack = ["a", "b", "c", "A", "B", "C", "1", "2", "3"];
-const createPasswordGenerator = function (pack) {
-  return function (length) {
-    let passwordNew = "";
-    for (let index = 0; index < length; index++) {
-      const randomCharachterIndex = Math.floor(Math.random() * pack.length);
-      passwordNew += pack[randomCharachterIndex];
+    return transaction;
+  },
+
+  /*
+   * Метод відповідає за додавання суми до балансу.
+   * Приймає суму танзакції.
+   * Викликає createTransaction для створення об'єкта транзакції
+   * після чого додає його в історію транзакцій
+   */
+  deposit(amount) {
+    if (amount <= 0) {
+      console.log("Додати 0 або менше 0 не можна");
+      return;
     }
-    return passwordNew;
-  };
+    //  Метод відповідає за додавання суми до балансу.
+    this.balance += amount;
+    // Викликає createTransaction для створення об'єкта транзакції
+    const depositTransaction = this.createTransaction(
+      amount,
+      Transaction.DEPOSIT
+    );
+    // push - він дозволяє додати що передасте в масив
+    //  після чого додає його в історію транзакцій
+    this.transactions.push(depositTransaction);
+  },
+
+  /*
+   * Метод відповідає за зняття суми з балансу.
+   * Приймає суму танзакції.
+   * Викликає createTransaction для створення об'єкта транзакції
+   * після чого додає його в історію транзакцій.
+   *
+   * Якщо amount більше, ніж поточний баланс, виводь повідомлення
+   * про те, що зняття такої суми не можливо, недостатньо коштів.
+   */
+  withdraw(amount) {
+    // Метод відповідає за зняття суми з балансу.
+    if (amount > this.balance) {
+      console.log(
+        `зняття такої суми не можливо, недостатньо коштів. Вам не вистачає ${
+          amount - this.balance
+        } грн`
+      );
+      return;
+    }
+
+    this.balance -= amount;
+    //  Викликає createTransaction для створення об'єкта транзакції
+    const withdrowTransaction = this.createTransaction(
+      amount,
+      Transaction.WITHDRAW
+    );
+    // після чого додає його в історію транзакцій.
+    this.transactions.push(withdrowTransaction);
+  },
+
+  /*
+   * Метод повертає поточний баланс
+   */
+  getBalance() {
+    return this.balance;
+  },
+
+  /*
+   * Метод шукає і повертає об'єкт транзакції по id
+   */
+  getTransactionDetails(id) {
+    for (const transaction of this.transactions) {
+      // Метод шукає
+      if (id === transaction.id) {
+        // повертає об'єкт транзакції
+        return transaction;
+      }
+    }
+  },
+
+  /*
+   * Метод повертає кількість коштів
+   * певного типу транзакції з усієї історії транзакцій
+   */
+  getTransactionTotal(type) {
+    let result = 0;
+    for (const transaction of this.transactions) {
+      if (transaction.type === type) {
+        result += transaction.amount;
+      }
+    }
+    return result;
+  },
 };
 
-const generatorPassword = createPasswordGenerator(pack);
-console.log(generatorPassword);
+console.log(account.createTransaction(1000, Transaction.DEPOSIT));
+// console.log(account.createTransaction(1000, "Deposit"));
 
-const password = generatorPassword(123);
-console.log(password);
+account.deposit(1000);
+account.withdraw(1000);
+
+// console.log(account.getBalance());
+console.log(account.getTransactionDetails(randomId));
+account.deposit(1000);
+
+// console.log(account.getBalance());
+
+console.log(account.getTransactionTotal(Transaction.DEPOSIT));
+console.log(account.getTransactionTotal(Transaction.WITHDRAW));
+console.log(account.getBalance());

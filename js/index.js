@@ -1,95 +1,117 @@
+// // const numbers = [20, 10, 60, 70, 40];
+
+// // //min() - очікує набір окремих чисел (1,2,3,4,5,6)
+// // //min() - [] - масив -це не число
+// // console.log(Math.min(numbers)); // NaN
+
+// // console.log(numbers);
+// // // spread - розділення
+// // console.log(...numbers);
+// // console.log(Math.min(...numbers));
+// // // arguments (arguments)
+// // // ...rest (Збирає масиви)
+// // const func = (a, b, c, ...numbers) => {
+// //   console.log(...numbers);
+// // };
+
+// // func(20, 102, 30, 405, 20, 10, 20, 30, 405);
+
+// // const legoCollection = ["newLego", ...numbers, "newLego"];
+
+// // const obj = {
+// //   a: "a",
+// //   b: "b",
+// // };
+
+// // const newObjects = {
+// //   c: "c",
+// //   ...obj,
+// //   d: "d",
+// // };
+
+// // console.log(newObjects === obj);
+// // console.log(legoCollection);
+
+// const a = {
+//   name: "Petro",
+// };
+
+// const zyctrichSybota = {};
+
+// const zyctrcih1Sybota = zyctrichSybota;
+
+// console.log(zyctrichSybota === zyctrcih1Sybota);
+
+// const zyctrichNedilia = {};
+
+// const zyctrich1Nedilia = zyctrichNedilia;
+
+// console.log(zyctrichNedilia === zyctrich1Nedilia);
+
+// // Ці зустрічі вони мають різне посилання
+// console.log(zyctrichSybota === zyctrichNedilia);
+
+// const b = { ...a };
+
+// console.log(a);
+// console.log(b);
+
+// // Стандартна поведінка складних типів данних
+// console.log(a === b);
+// console.log(a == b);
+
+// // number - зберігається значення у памʼяті бо це примітив
+// const c = 5;
+
+// // objects - складний тип даних до якого відносяться масиви обʼєкти
+
 const obj = {
-  name: "Artem",
-  age: 23,
-  city: "Kharkiv",
+  name: "Petro",
+  lastName: "Trendelis",
+  age: 30,
+  proGamer: false,
+  // Метод обʼєкта
+  goWalk() {
+    console.log("Піти гуляти");
+  },
 };
 
-const copyObj = {
-  ...obj,
-  asd: "asd",
-  email: "asd@asd.com",
-  password: "qwerty12345@&",
-};
+//
+const namee = obj.name;
+const lastNamee = obj.lastName;
+const proGamerr = obj.proGamer;
+const agee = obj.age;
 
-// copyObj.email = "asd@asd.com";
-// copyObj.password = "qwerty12345@&";
+console.log(namee);
+//Деструктуризація
+// Ключове слово
+// {} - літерал обʼєкта (Позначають обʼєкт)
+//{ назва поля значення якого ми хочемо отримати у швидкий доступ }
+// = - привласнення
+//obj - з якого обʼєкту ми бажаємо привласнити значення цього поля
+const {
+  name: userName,
+  lastName,
+  age,
+  proGamer,
+  goWalk,
+  terms = "false",
+} = obj;
 
-console.log(copyObj);
+const { name: nameeee, ...rest } = obj;
 
-const obj1 = {
-  name: "Artem",
-  age: 23,
-  city: "Kharkiv",
-};
-// Складний тип даних (обʼєкт)
-// Адреса Фонатнова 6
-// Адреса Олексія 8
+console.log(rest);
 
-// Всі складні типи даних порівнюються за адресою(посиланням на їх місце у Купі)
-console.log(obj === obj1);
+//  name: userName, - : назву нової змінної
+// terms = "false" - значення за замовчуванням
+console.log(userName, terms);
 
-const asd = {
-  a: "B",
-};
-// Примітив
-const number = 5;
+goWalk();
 
-const arr = [1, 2, 3, 4, 5];
+//
+const nameee = userName;
+const lastNameee = lastName;
+const proGamerrr = proGamer;
+const ageee = age;
 
-let result = 0;
-
-for (let i = 0; i < arr.length; i++) {
-  const element = arr[i];
-  console.log(element);
-  result += element;
-}
-
-console.log(result);
-
-// for (const key of obj) {
-//   console.log(key);
-// }
-
-// OBJECT IS NOT ITERABLE (NO)
-
-// MAGIC
-
-// for ... in
-for (const key in obj) {
-  console.log(key);
-  console.log(obj[key]);
-}
-
-console.log("abc");
-
-// Object.keys(), Object.values(), Object.entries()
-
-// Object.keys(obj) - Повертає масив ключів обʼєкту
-console.log(Object.keys(obj));
-//Object.values() - повератає масив значень обʼєкту
-console.log(Object.values(obj));
-// Object.entries() - повертає матрицю(в кожному вкладеному масиві пара ключ значення)
-console.log(Object.entries(obj));
-
-// ...Spread(Розпилення)
-
-// ...spread оператор для обʼєктів в основному необхідний для копіювання
-//Беремо обʼєкт і передаєм по черзі кожну властивість обʼєкту
-// 1) name: "Artem", перенесли це
-// 2)  age: 23,
-// 3) city: "Kharkiv",
-const object = { ...obj };
-const string = "asd";
-const string1 = "asd";
-const string3 = "obj";
-// Примітиви порівнюються та зберігаються за значеннями
-console.log(string === string1);
-// Обʼєкти та складні типи данних порівнюються за посиланням у памʼяті(купі)
-console.log(obj === string3);
-
-console.log(object);
-
-const arr1 = [1, 2, 3, 4, 5];
-const copyArr1 = [...arr1, 6, 7, 8, 9, 10];
-
-console.log(arr1 === copyArr1);
+// Привіт, ваш нікнейм

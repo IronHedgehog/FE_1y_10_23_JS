@@ -181,3 +181,29 @@ console.log(readyCheck);
 const everyReadyCheck = team.every((team) => team.readyToProject);
 
 console.log(everyReadyCheck);
+
+// DOM
+
+const users = [
+  {
+    name: "Petro",
+  },
+  {
+    name: "Artem",
+  },
+  {
+    name: "htos",
+  },
+  {
+    name: "shoc",
+  },
+];
+
+const ul = document.createElement("ul");
+
+users.forEach((user) =>
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<li>${user.name}</li> <button class="student">перевірити</button>`
+  )
+);

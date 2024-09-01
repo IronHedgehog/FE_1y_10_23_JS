@@ -199,11 +199,65 @@ const users = [
   },
 ];
 
-const ul = document.createElement("ul");
+// const ul = document.createElement("ul");
 
-users.forEach((user) =>
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `<li>${user.name}</li> <button class="student">перевірити</button>`
-  )
+// users.forEach((user) =>
+//   document.body.insertAdjacentHTML(
+//     "beforeend",
+//     `<li>${user.name}</li> <button class="student">перевірити</button>`
+//   )
+// );
+
+const numbers3 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// numbers3.filter((item) => item < 3);
+
+// .reduce - метод перебору масиву з батарейкою
+// prevValue - поточне значення батарейки
+const a = numbers3.reduce((prevValue, number) => {
+  console.log(prevValue);
+  return (prevValue += number);
+}, 0);
+
+const ITDep = [
+  {
+    name: "Petro",
+    sallary: 20000,
+  },
+  {
+    name: "Mangust",
+    sallary: 15000,
+  },
+  {
+    name: "htos",
+    sallary: 30000,
+  },
+];
+
+const totalSallary = ITDep.reduce((prevValue, it) => prevValue + it.sallary, 0);
+
+console.log(totalSallary);
+// [] - будемо заряджати пустий масив
+// const plus = numbers3.reduce((prevValue, number) => {
+//   // return (prevValue = prevValue[]);
+// }, []);
+
+console.log(a);
+
+const strings = ["q", "w", "e", "a", "c", "b"];
+const numbers4 = [5, 3, 20, 50, 21];
+// a,b = це два параметри які приймає метод сорт
+// a - минуле значення
+// b - наступне значення
+// (a, b) => b - a) - прохід від найбільшого до найменшого
+// (a, b) => a - b) - прохід від найменшого до найбільшого
+console.log(numbers4.sort((prev, next) => prev - next));
+console.log(strings.sort());
+
+const sortedITDepartment = ITDep.sort(
+  (prev, next) => next.sallary - prev.sallary
 );
+console.log(sortedITDepartment);
+
+//Метод sort - функція з домішками(мотує початковий масив)
+//  тож робимо перед сортуванням копії(map(), slice(),[...ITDep].sort())

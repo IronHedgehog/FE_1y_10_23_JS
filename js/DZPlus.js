@@ -1,265 +1,202 @@
-// Напишіть сценарій для управління бібліотечною системою. Створіть об'єкт library, в якому потрібно реалізувати методи для роботи з книгами, читачами та історією видачі книг.
-
-/*
- * Є два типи операцій з книгами:
- * видача книги читачеві та повернення книги в бібліотеку.
- */
 const BookOperation = {
   BORROW: "borrow",
   RETURN: "return",
 };
 
-/*
- * Кожна операція - це об'єкт з властивостями: id, type, bookId та readerId
- */
-
 const library = {
-  // Список книг у бібліотеці
   books: [
     {
       id: 1,
       title: "To Kill a Mockingbird",
       author: "Harper Lee",
-      genre: "Fiction",
       year: 1960,
-      borrow: false,
+      available: true,
     },
     {
       id: 2,
       title: "1984",
       author: "George Orwell",
-      genre: "Dystopian",
       year: 1949,
-      borrow: false,
+      available: true,
     },
     {
       id: 3,
       title: "The Great Gatsby",
       author: "F. Scott Fitzgerald",
-      genre: "Classics",
       year: 1925,
-      borrow: false,
+      available: true,
     },
     {
       id: 4,
       title: "Pride and Prejudice",
       author: "Jane Austen",
-      genre: "Romance",
       year: 1813,
-      borrow: false,
+      available: true,
     },
     {
       id: 5,
       title: "The Catcher in the Rye",
       author: "J.D. Salinger",
-      genre: "Literature",
       year: 1951,
-      borrow: false,
+      available: true,
     },
   ],
 
-  // Список зареєстрованих читачів
   readers: [
     {
       id: 3001,
       name: "Олександр Петренко",
       email: "oleksandr.petrenko@example.com",
-      age: 32,
-      isSubscribed: true,
-      books: [],
+      //new Set() - перевіряє унікальність елементів, має власні методи для спрощення (has,delete,add)
+      books: new Set(),
     },
     {
       id: 3002,
       name: "Марія Іваненко",
       email: "mariya.ivanenko@example.com",
-      age: 27,
-      isSubscribed: false,
-      books: [],
+      books: new Set(),
     },
     {
       id: 3003,
       name: "Андрій Ковальчук",
       email: "andriy.kovalchuk@example.com",
-      age: 45,
-      isSubscribed: true,
-      books: [],
+      books: new Set(),
     },
     {
       id: 3004,
       name: "Наталія Шевченко",
       email: "nataliya.shevchenko@example.com",
-      age: 39,
-      isSubscribed: true,
-      books: [],
+      books: new Set(),
     },
     {
       id: 3005,
       name: "Ігор Сидоренко",
       email: "ihor.sydorenko@example.com",
-      age: 24,
-      isSubscribed: false,
-      books: [],
+      books: new Set(),
     },
   ],
 
-  // Історія операцій з книгами
   operations: [],
 
-  /*
-   * Метод створює і повертає об'єкт операції.
-   * Приймає тип операції, id книги та id читача.
-   */
+  lastId: { book: 5, reader: 3005, operation: 0 },
+
   createOperation(type, bookId, readerId) {
-    // кожен раз створює нову операцію при виклику
     const operation = {
-      id: Math.random() * (2000 - 1000) + 1000,
+      id: ++this.lastId.operation,
       type,
       bookId,
       readerId,
+      date: new Date().toISOString(),
     };
-    this.operations.push(operation); // Додаємо операцію до історії
-    return operation; // Повертаємо створену операцію
+    this.operations.push(operation);
+    return operation;
   },
 
-  /*
-   * Метод відповідає за додавання нової книги до бібліотеки.
-   * Приймає об'єкт з інформацією про книгу (назва, автор, рік видання).
-   */
-  addBook(bookInfo) {
+  addBook({ title, author, year }) {
     const newBook = {
-      id: Math.random() * (1000 - 5) + 5,
-      borrow: false,
-      // весь вміст який вклали у bookInfo
-      ...bookInfo,
+      id: ++this.lastId.book,
+      title,
+      author,
+      year,
+      available: true,
     };
-    this.books.push(newBook); // Додаємо нову книгу до списку книг
-    return newBook; // Повертаємо об'єкт нової книги
+    this.books.push(newBook);
+    return newBook;
   },
 
-  /*
-   * Метод відповідає за реєстрацію нового читача.
-   * Приймає об'єкт з інформацією про читача (ім'я, email).
-   */
-  addReader(readerInfo) {
+  addReader({ name, email }) {
     const newReader = {
-      id: Math.random() * (4000 - 3005) + 3005,
-      books: [],
-      // весь вміст який вклали у bookInfo
-      ...readerInfo,
-      isSubscribed: false, // Новий читач за замовчуванням не підписаний
+      id: ++this.lastId.reader,
+      name,
+      email,
+
+      books: new Set(),
     };
-    this.readers.push(newReader); // Додаємо нового читача до списку читачів
-    return newReader; // Повертаємо об'єкт нового читача
+    this.readers.push(newReader);
+    return newReader;
   },
 
-  /*
-   * Метод відповідає за видачу книги читачеві.
-   * Приймає id книги та id читача.
-   * Викликає createOperation для створення об'єкта операції,
-   * після чого додає його в історію операцій.
-   *
-   * Якщо книга вже видана або читач має заборгованість, виводить відповідне повідомлення.
-   */
+  findBook(bookId) {
+    return this.books.find((book) => book.id === bookId);
+  },
+
+  findReader(readerId) {
+    return this.readers.find((reader) => reader.id === readerId);
+  },
+
   borrowBook(bookId, readerId) {
-    const book = this.books.find((bookItem) => bookItem.id === bookId);
-    console.log(book);
-    const person = this.readers.find(
-      (readersItem) => readersItem.id === readerId
-    );
-    console.log(person);
-    if (!book) {
-      console.log("Такої книги у нас немає в базі");
-      return;
-    }
-    if (!person) {
-      console.log("Такої читача у нас немає в базі");
-      return;
-    }
-    // Перевіряємо, чи книга вже була видана
+    const book = this.findBook(bookId);
+    const reader = this.findReader(readerId);
 
-    const borrowBook = this.books.find((book) => book.bookId === bookId);
-
-    // const isBookBorrowed = this.operations.some(
-    //   (bookItem) =>
-    //     bookItem.bookId === bookId && bookItem.type === BookOperation.BORROW
-    // );
-    if (borrowBook.borrow) {
-      console.log("Книга вже видана.");
-      return;
+    if (!book || !reader) {
+      console.log("Книгу або читача не знайдено");
+      return null;
     }
 
-    person.books.push(book);
+    if (!book.available) {
+      console.log("Книга вже видана");
+      return null;
+    }
 
-    const borrowing = this.createOperation(
-      BookOperation.BORROW,
-      bookId,
-      readerId
-    );
-    console.log("Книга видана читачеві:", borrowing);
+    book.available = false;
+    reader.books.add(bookId);
+    return this.createOperation(BookOperation.BORROW, bookId, readerId);
   },
 
-  /*
-   * Метод відповідає за повернення книги в бібліотеку.
-   * Приймає id книги та id читача.
-   * Викликає createOperation для створення об'єкта операції,
-   * після чого додає його в історію операцій.
-   */
   returnBook(bookId, readerId) {
-    const book = this.books.find((b) => b.id === bookId);
-    const person = this.readers.find((p) => p.id === readerId);
-    if (!book) {
-      console.log("Такої книги у нас немає в базі");
-      return;
-    }
-    if (!person) {
-      console.log("Такої читача у нас немає в базі");
-      return;
-    }
-    // Перевіряємо, чи книга була видана цьому читачеві
+    const book = this.findBook(bookId);
+    const reader = this.findReader(readerId);
 
-    const isBookBorrowed = this.operations.some(
-      (op) =>
-        op.bookId === bookId &&
-        op.readerId === readerId &&
-        op.type === BookOperation.BORROW
-    );
-
-    if (!isBookBorrowed) {
-      console.log("Ця книга не була видана цьому читачеві.");
-      return;
+    if (!book || !reader) {
+      console.log("Книгу або читача не знайдено");
+      return null;
     }
 
-    // Додаємо операцію повернення книги
-    const operation = this.createOperation(
-      BookOperation.RETURN,
-      bookId,
-      readerId
-    );
-    console.log("Книга повернута:", operation);
+    if (!reader.books.has(bookId)) {
+      console.log("Ця книга не була видана цьому читачеві");
+      return null;
+    }
+
+    book.available = true;
+    reader.books.delete(bookId);
+    return this.createOperation(BookOperation.RETURN, bookId, readerId);
   },
 
-  /*
-   * Метод повертає список доступних (не виданих) книг
-   */
   getAvailableBooks() {
-    const spysok = [];
-  },
-  /*
-   * Метод повертає список книг, які зараз знаходяться у певного читача
-   */
-  getReaderBooks(readerId) {},
-  /*
-   * Метод шукає і повертає об'єкт операції за id
-   */
-  getOperationDetails(id) {
-    const findOperation = this.operations.find((item) => item.id === id);
+    return this.books.filter((book) => book.available);
   },
 
-  /*
-   * Метод повертає кількість операцій певного типу за всю історію
-   */
-  getOperationTotal(typeOper) {
-    return this.operations.filter((operation) => operation.type === typeOper)
+  getReaderBooks(readerId) {
+    const reader = this.findReader(readerId);
+    return reader ? this.books.filter((book) => reader.books.has(book.id)) : [];
+  },
+
+  getOperationDetails(id) {
+    return this.operations.find((operation) => operation.id === id);
+  },
+
+  getOperationTotal(type) {
+    return this.operations.filter((operation) => operation.type === type)
       .length;
   },
 };
+
+// Тестування
+console.log("Доступні книги:", library.getAvailableBooks());
+
+const borrowOp = library.borrowBook(1, 3001);
+console.log("Операція видачі:", borrowOp);
+console.log("Книги читача 3001:", library.getReaderBooks(3001));
+
+const returnOp = library.returnBook(1, 3001);
+console.log("Операція повернення:", returnOp);
+console.log("Доступні книги після повернення:", library.getAvailableBooks());
+
+console.log(
+  "Загальна кількість операцій видачі:",
+  library.getOperationTotal(BookOperation.BORROW)
+);
+console.log(
+  "Загальна кількість операцій повернення:",
+  library.getOperationTotal(BookOperation.RETURN)
+);

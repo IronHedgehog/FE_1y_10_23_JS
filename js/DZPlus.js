@@ -181,7 +181,6 @@ const library = {
   },
 };
 
-// Тестування
 console.log("Доступні книги:", library.getAvailableBooks());
 
 const borrowOp = library.borrowBook(1, 3001);

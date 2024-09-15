@@ -3,23 +3,67 @@
 // class - ключове слово для створення класу
 // після ключового слова завжди буде назва класу
 // Назва класу завжди пишеться  з великої літери
+// інкапсуляція реалізується за допомогою приватних властивостей та методів
+// щоб зробити методи та властивості приватними ма маємо з вами додати перед їх ініціалізацією #
 class Character {
+  //приватна властивість магія
+  // Приватна властивість - це та властивість яка недоступна у зовнішньому коді а доступна тільки всередині класу
+  //Ми можемо це виправити за допомогою гетерів та сетерів
+  #name;
+  #mana;
+  #health;
+  #damage;
+
   // constructor - функція яка виконує дію зборки вашого обʼєкту (ініціалізації початкових значень вашого нового обʼєкту)
   constructor(name, health, mana, damage = 100) {
     // this.name - створення в обʼєкті ключа name
     //  = name - присвоєня значення до ключа
-    this._name = name;
-    this._health = health;
-    this._mana = mana;
-    this._damage = damage;
+    this.#name = name;
+    this.#health = health;
+    this.#mana = mana;
+    this.#damage = damage;
   }
 
   get name() {
-    return this.name;
+    return this.#name;
+  }
+
+  get mana() {
+    return this.#mana;
+  }
+
+  get health() {
+    return this.#health;
+  }
+
+  set health(newHealth) {
+    // тернарний оператор
+    //  newHealth > 0 - умова
+    //? newHealth - якщо умова справдлилась підставити значення одразу після знаку питання
+    //: 0 - якщо умова не справдилась то застосувати 0
+    this.#health = newHealth > 0 ? newHealth : 0;
+  }
+
+  get damage() {
+    return this.#damage;
   }
 
   set changeName(newName) {
-    this._name = newName;
+    if (newName === "") {
+      throw new Error("Введіть правильне імʼя");
+    }
+    this.#name = newName;
+  }
+
+  isAlive() {
+    // оператори порівняння повертають true або false
+    // > - true або false
+    // if (this.#health > 0) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return this.#health > 0;
   }
   // звичайний метод обʼєкту який виводить в консоль завдану шкоду
   attackEnemy(enemy) {
@@ -34,6 +78,22 @@ class Character {
     );
   }
 }
+
+const qwerty = new Character("nickName", 100, 100, 100);
+
+console.log(qwerty.name);
+console.log(qwerty.damage);
+console.log(qwerty.health);
+console.log(qwerty.mana);
+
+// qwerty.#damage = 1000;
+console.log(qwerty.damage);
+
+console.log(qwerty.mana);
+
+console.log((qwerty.changeName = "asdasasdas"));
+
+console.log(qwerty.name);
 // У константу hero ми створюємо нову сутність
 // const hero = new Character("Hero", 100, 100, 100);
 // const hero = new Character();
@@ -51,21 +111,44 @@ class Character {
 
 // для того щоб унаслідувати усі методи та конструктори класу character ми маємо застосувати при створенні класу HERO ключове слово extends після якого вказати клас від якого бажаєм наслідуватись
 class Hero extends Character {
+  // static role = {
+  //   WARRIOR: "Воїн",
+  // };
+
+  #heroSpell;
   // оскільки даний клас наслідується від Character то ми можемо використовувати його конструктор за допомогою ключового слова super
   constructor(name, health, damage, mana, heroSpell = "fireBoll") {
-    // Використання батьківського конструктору
+    // Використання батьківського конструктору(унаслідували)
     super(name, health, mana, damage);
-    this._heroSpell = heroSpell;
+    this.#heroSpell = heroSpell;
+
+    // this.role = "asdasd";
+  }
+
+  get heroSpell() {
+    return this.#heroSpell;
   }
 
   attack() {
-    console.log(`застосовується${this.heroSpell}`);
+    console.log(`застосовується ${this.#heroSpell}`);
   }
 }
 
-const Petro = new Hero(100, 100, 100);
+const Petro = new Hero("Petro", 100, 100, 100);
+
+// console.log((Petro.role = "qwerty"));
+// console.log(Petro.role);
+
+// console.log(Petro.role);
+
+// Petro.mana = 1000;
+
+console.log(Petro.mana);
+
 Petro.attack();
-console.log(Petro);
+// console.log((Petro.heroSpell = "nothing"));
+
+console.log(Petro.heroSpell);
 
 class Enemy extends Character {
   constructor(name, health, mana, damage, monsterSpell = "Roar") {
@@ -128,3 +211,13 @@ class Game {
     console.log(`${this._hero.name} вирушає в подорож`);
   }
 }
+
+class User {
+  // constructor за замовчуванянм
+  constructor() {}
+}
+
+const user = new User();
+console.log(user);
+
+console.log(new Enemy("asd"));

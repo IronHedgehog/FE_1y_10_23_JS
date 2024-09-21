@@ -221,3 +221,5 @@ const user = new User();
 console.log(user);
 
 console.log(new Enemy("asd"));
+
+[].filterFunc();

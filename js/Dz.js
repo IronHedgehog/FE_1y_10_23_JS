@@ -40,3 +40,30 @@ categories.forEach((category) => {
   console.log(`Категорія: ${title}`);
   console.log(`Кількість елементів: ${elementsCount}`);
 });
+
+const images = [
+  {
+    url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    alt: "White and Black Long Fur Cat",
+  },
+  {
+    url: "https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    alt: "Orange and White Koi Fish Near Yellow Koi Fish",
+  },
+  {
+    url: "https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    alt: "Orange and White Koi Fish Near Yellow Koi Fish",
+  },
+];
+
+const ulGallery = document.querySelector("#gallery");
+const mapGallery = images
+  .map((image) => {
+    return `<li><img class="img" src="${image.url}" alt="${image.alt}" width="300" height="200"></li>`;
+  })
+  .join("");
+
+ulGallery.insertAdjacentHTML("beforeend", mapGallery);
+ulGallery.style.display = "flex";
+ulGallery.style.listStyle = "none";
+ulGallery.style.justifyContent = "space-between";

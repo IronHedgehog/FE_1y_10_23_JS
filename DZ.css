@@ -32,3 +32,11 @@
   left: 0;
   right: 0;
 }
+
+.show {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}

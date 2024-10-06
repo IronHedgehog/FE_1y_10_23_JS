@@ -4,3 +4,41 @@
 .green {
   color: green;
 }
+
+* {
+  cursor: none;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cursor {
+  width: 40px;
+  height: 40px;
+  /* background-color: black; */
+  position: absolute;
+  pointer-events: none;
+  background-image: url(./symbol-defs.svg#icon-hand-o-up);
+  z-index: 1000;
+}
+
+.cursor-icon {
+  width: 40px;
+  height: 40px;
+  fill: deeppink;
+}
+
+.button {
+  width: 200px;
+  height: 200px;
+  background-color: black;
+  color: aliceblue;
+  border-radius: 20px;
+}

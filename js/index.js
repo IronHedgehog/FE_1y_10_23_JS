@@ -22,7 +22,7 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("keydown", (e) => {
   //  preventDefault() - заблокувати дії браузера за замовчуванням
   // Можемо вигадати будь-які комбінації вимкнути їх в браузері та перевизначити на наші які нам потрібно
-  e.preventDefault();
+  // e.preventDefault();
 
   if ((e.ctrlKey || e.altKey) && e.code === "KeyS") {
     document.body.style.backgroundColor = "black";
@@ -30,3 +30,51 @@ document.addEventListener("keydown", (e) => {
 });
 
 // Події мишки
+
+// mousemove
+
+const cursor = document.querySelector(".cursor");
+const button = document.querySelector(".button");
+const cursorIcon = document.getElementById("cursor-icon");
+const svg = document.querySelector(".cursor-icon");
+
+document.addEventListener("mousemove", updateMousePosition);
+
+function updateMousePosition(e) {
+  // CSS
+  // cursor.offsetWidth; - поточний розмір елемента
+  // console.log(cursor.offsetWidth);
+  cursor.style.left = `${e.clientX - cursor.offsetWidth / 2}px`;
+  // e.clientY - cursor.offsetWidth / 2 - центрування курсору в залежності від його розміру
+  cursor.style.top = `${e.clientY - cursor.offsetWidth / 2 + 15}px`;
+}
+
+button.addEventListener("mouseover", onMouseOver);
+
+function onMouseOver(e) {
+  // console.log("Навів на кнопку");
+  // const newCursor = `
+  //   <svg class="cursor-icon">
+  //     <use id="cursor-icon" href="../symbol-defs.svg#icon-play"></use>
+  //   </svg>
+  // `;
+  // cursor.innerHTML = "";
+  // svg.innerHTML = newCursor;
+
+  svg.style.fill = "white";
+}
+
+button.addEventListener("mouseout", onMouseOut);
+
+function onMouseOut(e) {
+  svg.style.fill = "deeppink";
+}
+
+button.addEventListener("dblclick", (e) => {
+  console.log("Стався даблклік");
+});
+
+button.addEventListener("contextmenu", (e) => {
+  console.log(e);
+  e.preventDefault();
+});

@@ -1,3 +1,5 @@
+"use strict";
+
 document.body.addEventListener("click", (event) => {
   // event - обʼєкт події
   console.log(event);
@@ -10,6 +12,7 @@ document.body.addEventListener("click", (event) => {
 // події клавіатури відпрацьовуються на Document
 
 document.addEventListener("keydown", (e) => {
+  console.log(e);
   // унікальний Код фізичної клавіші
   console.log("code - ", e.code);
   // Повертає символ який має бути згенеровано
@@ -52,14 +55,7 @@ function updateMousePosition(e) {
 button.addEventListener("mouseover", onMouseOver);
 
 function onMouseOver(e) {
-  // console.log("Навів на кнопку");
-  // const newCursor = `
-  //   <svg class="cursor-icon">
-  //     <use id="cursor-icon" href="../symbol-defs.svg#icon-play"></use>
-  //   </svg>
-  // `;
-  // cursor.innerHTML = "";
-  // svg.innerHTML = newCursor;
+  cursorIcon.setAttribute("href", "../symbol-defs.svg#hover-cursor");
 
   svg.style.fill = "white";
 }
@@ -67,6 +63,7 @@ function onMouseOver(e) {
 button.addEventListener("mouseout", onMouseOut);
 
 function onMouseOut(e) {
+  cursorIcon.setAttribute("href", "../symbol-defs.svg#default-cursor");
   svg.style.fill = "deeppink";
 }
 
@@ -77,4 +74,12 @@ button.addEventListener("dblclick", (e) => {
 button.addEventListener("contextmenu", (e) => {
   console.log(e);
   e.preventDefault();
+});
+
+button.addEventListener("mousedown", (e) => {
+  cursorIcon.setAttribute("href", "../symbol-defs.svg#grab-cursor");
+});
+
+button.addEventListener("mouseup", (e) => {
+  cursorIcon.setAttribute("href", "../symbol-defs.svg#hover-cursor");
 });

@@ -19,17 +19,20 @@ div3.addEventListener('click', onClick3);
 ul.addEventListener('click', onClickLi);
 
 function onClick(e) {
+  console.log('перший елемент');
   console.log(e.currentTarget);
   console.log(e.target);
 }
 
 function onClick2(e) {
   // e.stopPropagation();
+  console.log('Другий елемент');
   console.log(e.currentTarget);
 }
 
 function onClick3(e) {
   e.stopPropagation();
+  console.log('початок руху');
   console.log(e.currentTarget);
 }
 
@@ -54,8 +57,7 @@ function onClickLi(e) {
 const span = document.querySelector('.span');
 const div = document.querySelector('.color-palette');
 
-div.addEventListener('mou', onColorClick);
-div.addEventListener('mouse');
+div.addEventListener('mouse', onColorClick);
 
 function onColorClick(e) {
   if (e.target.nodeName !== 'BUTTON') return;

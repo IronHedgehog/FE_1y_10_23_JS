@@ -1,0 +1,20 @@
+{
+  "name": "fe_1y_10_23_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "nanoid": "^5.0.9"
+  }
+}

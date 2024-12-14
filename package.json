@@ -12,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^4.4.7",
+    "nanoid": "^5.0.9",
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "nanoid": "^5.0.9"
+    "@pnotify/core": "^5.2.0"
   }
 }

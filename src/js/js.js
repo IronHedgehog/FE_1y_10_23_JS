@@ -10,3 +10,5 @@ export function goodbye(name) {
 //   hello,
 //   goodbye,
 // };
+
+export { goodbye, hello };

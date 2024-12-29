@@ -1,0 +1,19 @@
+<template id="posts">
+  <section class="posts">
+    <div class="container">
+      <h2>POSTS</h2>
+      <ul class="posts-list">
+        <!-- #each - запуск циклу -->
+        <!-- posts - за цією назвою ми маємо через js у шаблон передати масив данних  -->
+        {{#each posts}}
+        <li class="posts-item">
+          <h3 class="posts-heading">userId: {{this.userId}}</h3>
+          <p class="post-id">id: {{this.id}}</p>
+          <p class="post-title">title: {{this.title}}</p>
+          <p class="post-body">body: {{this.body}}</p>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+</template>

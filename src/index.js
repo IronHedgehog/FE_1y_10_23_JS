@@ -1,43 +1,54 @@
-// const template = document.getElementById('template');
+const user = {
+  name: 'Petro',
+  email: 'Asd@asd.com',
+  password: 'QWERTY12345',
+  confirmPassword: true,
+};
 
-import { posts } from './js/data';
+console.log(user);
+const stringifyData = JSON.stringify(user);
 
-// document.addEventListener('DOMContentLoaded', e => {
-//   const shablon = template.innerHTML.trim();
-//   console.log(shablon);
-//   const compileTemplate = Handlebars.compile(shablon);
+// console.log(stringifyData);
 
-//   const a = compileTemplate({
-//     userID: 2,
-//     postId: 3,
-//     postTitle:
-//       'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-//     postBody:
-//       'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
-//   });
+console.log(stringifyData);
 
-//   const b = compileTemplate({
-//     userID: 1,
-//     postId: 2,
-//     postTitle: 'a',
-//     postBody: 'b',
-//   });
-//   // innerHTML - повністю очищує елемент після чого додає контент який ви попросили
-//   document.body.innerHTML = a;
-//   document.body.innerHTML = b;
-//   document.body.insertAdjacentHTML('beforeend', a);
-// });
+const string = typeof stringifyData;
+console.log(string);
 
-// -------------------  2 - заняття  -------------------- //
+const obj = JSON.parse(stringifyData);
 
-const postsTemplate = document.getElementById('posts').innerHTML.trim();
-// trim() - видаляє пробіли на початку рядка та вкінці
-console.log(postsTemplate);
+console.log(obj);
 
-const compiledTemplate = Handlebars.compile(postsTemplate);
-console.log(compiledTemplate);
-
-document.body.insertAdjacentHTML(
-  'beforeend',
-  compiledTemplate({ posts: posts })
-);
+[
+  {
+    userId: 1,
+    id: 1,
+    title:
+      'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+    body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+  },
+  {
+    userId: 1,
+    id: 2,
+    title: 'qui est esse',
+    body: 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla',
+  },
+  {
+    userId: 1,
+    id: 3,
+    title: 'ea molestias quasi exercitationem repellat qui ipsa sit aut',
+    body: 'et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut',
+  },
+  {
+    userId: 1,
+    id: 4,
+    title: 'eum et est occaecati',
+    body: 'ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit',
+  },
+  {
+    userId: 1,
+    id: 5,
+    title: 'nesciunt quas odio',
+    body: 'repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque',
+  },
+];

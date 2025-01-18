@@ -1,69 +1,63 @@
-// console.log('first');
+let seconds = 0;
 
-// setTimeout - 2 частини
-// () => {console.log('second');} - колбек, який виконається після вказаного у другому параметрі часу
-// 2-й параметр: час очікування (завжди вказується у мілісекундах)
-// у одній секунді - 1000мс
-// const clock = setTimeout(() => {
-//   console.log('second');
-// }, 0);
+// setInterval(() => {
+//   seconds++;
 
-// console.log('third');
+//   console.log(seconds);
+//   const minutes = Math.floor(seconds / 60);
+//   const hours = Math.floor(minutes / 60);
 
-// function welcome() {
-//   console.log('Welcome');
-// }
+//   console.log('minutes : ', minutes);
+//   console.log('hours : ', hours);
+// }, 100);
 
-// console.log(clock);
-// clearTimeout(clock);
+let timer;
+function startTimer() {
+  timer = setInterval(function () {
+    seconds++;
+    document.getElementById('timer').innerText = new Date()
+      .toISOString()
+      .substr(11, 8);
+  }, 1000);
+}
 
-// clock(welcome, 300);
-
-// console.log('third');
-
-// let counter = 0;
-
-// const interval = setInterval(() => {
-//   counter += 1;
-//   console.log(counter);
-//   if (counter === 5) {
-//     clearInterval(interval);
-//   }
-// }, 1000);
-
-// console.log('interval: ', interval);
-
-// --------------------- 2 - частина
-
+const input = document.getElementById('input');
+const button = document.getElementById('stop');
 const buttonStart = document.getElementById('start');
-const buttonStop = document.getElementById('stop');
-const timeInput = document.getElementById('time');
-const timeLeft = document.getElementById('timeLeft');
-const form = document.getElementById('form');
 
-form.addEventListener('submit', onSubmit);
+input.addEventListener('input', _.debounce(onInput, 250));
 
-function onSubmit(e) {
-  e.preventDefault();
+function onInput(e) {
+  const inputValue = Number(e.target.value);
+  if (Number.isNaN(inputValue)) return;
+  let counter = inputValue;
+  let timer;
 
-  let time = Number(e.currentTarget.elements.time.value);
-
-  const buttonStop = e.currentTarget.elements.stop;
-
-  let counter = time;
-  const timer = setInterval(() => {
-    counter -= 1;
-    timeLeft.textContent = counter;
+  timer = setInterval(() => {
+    counter--;
     console.log(counter);
-    if (counter === 0) {
-      timeLeft.textContent = 'Таймер завершився';
+
+    if (counter === 10) {
+      document.body.style.backgroundColor = 'black';
+    }
+    if (counter === 0 || inputValue === 0 || inputValue === null) {
       clearInterval(timer);
     }
   }, 1000);
-  // FIXME: видалити слухач подій
-  buttonStop.addEventListener('click', () => {
+  button.addEventListener('click', onClick);
+  buttonStart.addEventListener('click', onStartClick);
+  function onClick(e) {
     clearInterval(timer);
-    counter = Number(timeLeft.textContent);
-    form.elements.time.value = counter;
-  });
+  }
+
+  function onStartClick(e) {
+    timer = setInterval(() => {
+      counter--;
+      console.log(counter);
+
+      if (counter === 0 || inputValue === 0 || inputValue === null) {
+        clearInterval(timer);
+      }
+    }, 1000);
+  }
 }

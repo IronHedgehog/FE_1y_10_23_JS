@@ -1,63 +1,69 @@
-let seconds = 0;
+// new Date() - поточна дата та час на вашому місцізнаходження
+const timeOnMS = Date.now();
+const constDate = new Date(Date.now());
+console.log(constDate);
+// .now() - повертає час з 70го року до зараз у мілісекундах
 
-// setInterval(() => {
-//   seconds++;
+// asdsassdsasdsdsdsdsdsdsdsdsdsdssdsdsdsdasdasdasdasdasdasdasdasdasdasdasdasdasdqweqweqweqweqweqweqweqweqweqweqweqweqweqweqws
+console.log(timeOnMS);
+// .getDate() - повертає значення з 1 до 31
+const date = constDate.getDate();
+console.log(date);
+// .getDay(); - повертає від 0 до 6
+const day = constDate.getDay();
+console.log(day);
+// .getMonth() - повертає від 0 до 11
+const month = constDate.getMonth();
+console.log(month);
+const year = constDate.getFullYear();
+console.log(year);
 
-//   console.log(seconds);
-//   const minutes = Math.floor(seconds / 60);
-//   const hours = Math.floor(minutes / 60);
+const hours = constDate.getHours();
+console.log(hours);
 
-//   console.log('minutes : ', minutes);
-//   console.log('hours : ', hours);
-// }, 100);
+const minutes = constDate.getMinutes();
+console.log(minutes);
 
-let timer;
-function startTimer() {
-  timer = setInterval(function () {
-    seconds++;
-    document.getElementById('timer').innerText = new Date()
-      .toISOString()
-      .substr(11, 8);
-  }, 1000);
-}
+const seconds = constDate.getSeconds();
+console.log(seconds);
+const mls = constDate.getMilliseconds();
+console.log(mls);
 
-const input = document.getElementById('input');
-const button = document.getElementById('stop');
-const buttonStart = document.getElementById('start');
+const time = constDate.getTime();
+console.log(time);
 
-input.addEventListener('input', _.debounce(onInput, 250));
+let result = '';
 
-function onInput(e) {
-  const inputValue = Number(e.target.value);
-  if (Number.isNaN(inputValue)) return;
-  let counter = inputValue;
-  let timer;
+result += day + '/';
+result += date + '/';
+result += month + '/';
+result += year;
+console.log(result);
+result += ' Time: ' + hours + ':';
+result += minutes + ':';
+result += seconds + ':';
+result += mls;
+console.log(result);
 
-  timer = setInterval(() => {
-    counter--;
-    console.log(counter);
+const dateDate = new Date();
+console.log(dateDate);
 
-    if (counter === 10) {
-      document.body.style.backgroundColor = 'black';
-    }
-    if (counter === 0 || inputValue === 0 || inputValue === null) {
-      clearInterval(timer);
-    }
-  }, 1000);
-  button.addEventListener('click', onClick);
-  buttonStart.addEventListener('click', onStartClick);
-  function onClick(e) {
-    clearInterval(timer);
-  }
+const options = {
+  // day - число
+  day: '2-digit',
+  //weekday - назва дня
+  weekday: 'short',
+  month: 'short',
+  year: 'numeric',
+  hour: '2-digit',
+  // hourCycle: 'h12',
+  minute: '2-digit',
+};
 
-  function onStartClick(e) {
-    timer = setInterval(() => {
-      counter--;
-      console.log(counter);
+const locale = navigator.language;
+console.log(locale);
+const localeUk = dateDate.toLocaleString(locale, options);
+console.log(localeUk);
 
-      if (counter === 0 || inputValue === 0 || inputValue === null) {
-        clearInterval(timer);
-      }
-    }, 1000);
-  }
-}
+// Перетворення дати до числа
+// Обчислення різниці між датами

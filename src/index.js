@@ -1,11 +1,7 @@
 // new Date() - поточна дата та час на вашому місцізнаходження
-const timeOnMS = Date.now();
 const constDate = new Date(Date.now());
-console.log(constDate);
-// .now() - повертає час з 70го року до зараз у мілісекундах
 
-// asdsassdsasdsdsdsdsdsdsdsdsdsdssdsdsdsdasdasdasdasdasdasdasdasdasdasdasdasdasdqweqweqweqweqweqweqweqweqweqweqweqweqweqweqws
-console.log(timeOnMS);
+// .now() - повертає час з 70го року до зараз у мілісекундах
 // .getDate() - повертає значення з 1 до 31
 const date = constDate.getDate();
 console.log(date);
@@ -46,7 +42,6 @@ result += mls;
 console.log(result);
 
 const dateDate = new Date();
-console.log(dateDate);
 
 const options = {
   // day - число

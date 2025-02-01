@@ -62,7 +62,7 @@ const options = {
 
 const locale = navigator.language;
 console.log(locale);
-const localeUk = dateDate.toLocaleString(locale, {});
+const localeUk = dateDate.toLocaleString(locale, options);
 console.log(localeUk);
 
 // Перетворення дати до числа

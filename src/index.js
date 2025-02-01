@@ -11,10 +11,10 @@ console.log(now);
 const date = constDate.getDate();
 console.log(date);
 // .getDay(); - повертає від 0 до 6
-const day = constDate.getDay();
+const day = constDate.getDay() + 1;
 console.log(day);
 // .getMonth() - повертає від 0 до 11
-const month = constDate.getMonth();
+const month = constDate.getMonth() + 1;
 console.log(month);
 const year = constDate.getFullYear();
 console.log(year);

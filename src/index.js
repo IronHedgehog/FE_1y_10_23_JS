@@ -55,3 +55,62 @@ promise
     console.log('rej : ', rej);
     console.log('final task');
   });
+
+// Промісіфікація - (функція буде повертати проміс)
+
+function sum(a, b) {
+  return a + b;
+}
+
+function getSum(a, b) {
+  return new Promise((res, rej) => {
+    if (a && b) {
+      res(a + b);
+    } else {
+      rej('Не вистачає даних або не число');
+    }
+  });
+}
+
+console.log(sum(5, 5));
+
+console.log(getSum(10, 5).then(value => console.log(value)));
+
+// const fetchDataFromServer = (user, success, error) => {
+//   console.log(`fetch data for ${user}`);
+
+//   if (Math.floor(Math.random() * 10 + 1) > 5) {
+//     success('Успіх');
+//   } else {
+//     error('Не успіх');
+//   }
+// };
+
+// const fetchSuccess = user => {
+//   console.log(user);
+// };
+
+// const fetchError = user => {
+//   console.log(`${user} завантажити дані не вдалось`);
+// };
+
+// console.log(fetchDataFromServer('User', fetchSuccess, fetchError));
+
+const fetchDataFromServer = user => {
+  return new Promise((res, rej) => {
+    console.log(`fetch data for ${user}`);
+    setTimeout(() => {
+      if (Math.floor(Math.random() * 10 + 1) > 5) {
+        res('Успіх');
+      } else {
+        rej('Не успіх');
+      }
+    }, 2000);
+  });
+};
+
+fetchDataFromServer('user')
+  .then(value => {
+    console.log(`Отримали дані з сервера для юзера ${value}`);
+  })
+  .catch(error => console.log('Робимо повторний запит'));

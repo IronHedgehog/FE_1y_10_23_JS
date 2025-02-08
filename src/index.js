@@ -1,116 +1,55 @@
-const promise = new Promise(executor);
-
-// const promise1 = new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     if (Math.floor(Math.random() * 10 + 1) > 5) {
-//       resolve('Успіх');
-//       console.log('Успіх');
-//     } else {
-//       reject('Не успіх');
-//     }
-//   }, 1000);
-// });
-
-let res = 0;
-let rej = 0;
-
-function executor(resolve, reject) {
-  setTimeout(() => {
-    if (Math.floor(Math.random() * 10 + 1) > 5) {
-      resolve('Успіх');
-      res++;
-      console.log('Успіх');
-      console.log(promise);
-      // console.log(promise1);
-    } else {
-      reject('Не успіх');
-      rej++;
-      console.log(promise);
-      // console.log(promise1);
-    }
-  }, 1000);
-}
-
-console.log(promise);
-// console.log(promise1);
-// then - тригериться коли проміс змінює стан
-// параметром приймає результат промісу
-// Метод then на практиці відпрацьовує тільки успішні випадки
-promise
-  .then(
-    fulfilledValue => {
-      console.log('Успішне виконання промісу', fulfilledValue);
-    }
-    // error => {
-    //   console.log('Не успішне виконання', error);
-    // }
-  )
-  //  .catch - спеціально створений метод для опрацювання помилок
-  .catch(error => {
-    console.log('Catch: ', error);
-  })
-  // finally - зберігає код який має відпрацювати у будь-якому разі
-  .finally(() => {
-    console.log('res : ', res);
-    console.log('rej : ', rej);
-    console.log('final task');
-  });
-
-// Промісіфікація - (функція буде повертати проміс)
-
-function sum(a, b) {
-  return a + b;
-}
-
-function getSum(a, b) {
+const makePromise = (delay, text) => {
   return new Promise((res, rej) => {
-    if (a && b) {
-      res(a + b);
-    } else {
-      rej('Не вистачає даних або не число');
-    }
-  });
-}
-
-console.log(sum(5, 5));
-
-console.log(getSum(10, 5).then(value => console.log(value)));
-
-// const fetchDataFromServer = (user, success, error) => {
-//   console.log(`fetch data for ${user}`);
-
-//   if (Math.floor(Math.random() * 10 + 1) > 5) {
-//     success('Успіх');
-//   } else {
-//     error('Не успіх');
-//   }
-// };
-
-// const fetchSuccess = user => {
-//   console.log(user);
-// };
-
-// const fetchError = user => {
-//   console.log(`${user} завантажити дані не вдалось`);
-// };
-
-// console.log(fetchDataFromServer('User', fetchSuccess, fetchError));
-
-const fetchDataFromServer = user => {
-  return new Promise((res, rej) => {
-    console.log(`fetch data for ${user}`);
     setTimeout(() => {
-      if (Math.floor(Math.random() * 10 + 1) > 5) {
-        res('Успіх');
+      if (Math.floor(Math.random() * 10 + 1) < 5) {
+        res(text);
       } else {
-        rej('Не успіх');
+        rej(text);
       }
-    }, 2000);
+    }, delay);
   });
 };
 
-fetchDataFromServer('user')
-  .then(value => {
-    console.log(`Отримали дані з сервера для юзера ${value}`);
+const promiseA = makePromise(1000, 'promiseA');
+const promiseB = makePromise(2000, 'promiseB');
+const promiseC = makePromise(3000, 'promiseC');
+const promiseD = makePromise(4000, 'promiseD');
+
+Promise.all([promiseA, promiseB, promiseC, promiseD])
+  .then(value => console.log(value))
+  .catch(error => {
+    console.log('Нас зареджектило');
   })
-  .catch(error => console.log('Робимо повторний запит'));
+  .finally(() => {
+    console.log('PROMISE.ALL завершив виконання');
+  });
+
+Promise.race([promiseA, promiseB, promiseC, promiseD])
+  .then(value => console.log(value))
+  .catch(error => {
+    console.log('Нас зареджектило :', error);
+  })
+  .finally(() => {
+    console.log('PROMISE.RACE завершив виконання');
+  });
+
+Promise.any([promiseA, promiseB, promiseC, promiseD])
+  .then(value => console.log(value))
+  .catch(error => {
+    console.log('Нас зареджектило :', error.message);
+  })
+  .finally(() => {
+    console.log('PROMISE.ANY завершив виконання');
+  });
+
+new Promise(resolve => resolve('Успіх')).then(value => {
+  console.log(value);
+});
+
+Promise.resolve('Успіх').then(value => console.log(value));
+
+new Promise(rejected => rejected('Не успіх')).catch(value => {
+  console.log(value);
+});
+
+Promise.reject('Не успіх').catch(value => console.log(value));

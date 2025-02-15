@@ -4,8 +4,8 @@
 // Параметр 1-й: шлях за яким ви хочете отримати дані(ЗБЕРІГАЄТЬСЯ В ДОКУМЕНТАЦІЇ БЕКЕНДУ)
 // для отримання даних вам необхідний тільки один параметр(шлях)
 // МЕТОД FETCH - завжди повертає проміс
-fetch('https://jsonplaceholder.typicode.com/posts/10')
-  // Обробка даних
-  .then(response => response.json())
-  //дані
-  .then(json => console.log(json));
+// fetch('https://jsonplaceholder.typicode.com/posts/10')
+// Обробка даних
+// .then(response => response.json())
+//дані
+// .then(json => console.log(json));

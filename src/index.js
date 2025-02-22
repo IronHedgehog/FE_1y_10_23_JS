@@ -1,50 +1,28 @@
-// // fetch - інструмент для запитів на сервер який їде з коробки JS
+import { takeUsers } from './API/users';
 
-// // fetch - приймає два параметри
+// async await - async - робить вашу функцію асинхроною
+//await - почекати виконання
+// try catch - try  - спробувати виконати код всередині блоку якщо не вийщло передати управлдіння у блок catch
+// catch - ловить помилки та відпрацьовує їх
 
-// // Параметр 1-й: шлях за яким ви хочете отримати або зберегти дані(ЗБЕРІГАЄТЬСЯ В ДОКУМЕНТАЦІЇ БЕКЕНДУ)
+const makeMarkUp = async evt => {
+  try {
+    const users = await takeUsers();
 
-// // Параметр 2-й: обʼєкт налаштувань, (у нього ми вказуємо метод, тіло - дані які ми хочемо зберігти або змінити, заголовки - ключ реєстрації, формат даних які ви відправляєте)
+    const markUp = users
+      .map(({ email, nickname, password }) => {
+        return ` <h1>Email:${email}</h1>
+      <h1> Nickname:${nickname}</h1>
+     <h1> password:${password}</h1>
+     <button>DELETE</button>
+      `;
+      })
+      .join('');
 
-// // для отримання даних вам необхідний тільки один параметр(шлях)
+    document.body.insertAdjacentHTML('beforeend', markUp);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
-// // МЕТОД FETCH - завжди повертає проміс
-
-// const object1 = {
-//   name: 'Petro',
-// };
-
-// const updateObject1 = {
-//   ...object1,
-//   age: 150,
-//   avatar: 'avatar',
-//   lastNAme: 'Petro',
-// };
-
-// fetch('https://67b1add23fc4eef538ea6090.mockapi.io/posts', {
-//   method: 'POST',
-//   body: JSON.stringify(object1),
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// })
-//   // Обробка даних
-//   .then(response => response.json())
-//   //дані
-//   .then(json => printObject(json));
-
-// function printObject(object) {
-//   console.log(object);
-// }
-
-// fetch('https://67b1add23fc4eef538ea6090.mockapi.io/posts/56', {
-//   method: 'PUT',
-//   body: JSON.stringify(updateObject1),
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// });
-
-// fetch('https://67b1add23fc4eef538ea6090.mockapi.io/posts/56', {
-//   method: 'DELETE',
-// });
+document.addEventListener('DOMContentLoaded', makeMarkUp);

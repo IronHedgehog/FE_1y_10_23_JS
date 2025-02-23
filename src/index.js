@@ -1,4 +1,4 @@
-import { deleteUser, takeFlowers, takeUsers } from './API/users';
+import { deleteUser, takeUsers } from './API/users';
 
 // async await - async - робить вашу функцію асинхроною
 //await - почекати виконання
@@ -37,5 +37,3 @@ async function deleteClick(evt) {
 }
 
 document.addEventListener('DOMContentLoaded', makeMarkUp);
-
-takeFlowers();

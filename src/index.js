@@ -1,4 +1,4 @@
-import { takeUsers } from './API/users';
+import { deleteUser, takeFlowers, takeUsers } from './API/users';
 
 // async await - async - робить вашу функцію асинхроною
 //await - почекати виконання
@@ -10,11 +10,12 @@ const makeMarkUp = async evt => {
     const users = await takeUsers();
 
     const markUp = users
-      .map(({ email, nickname, password }) => {
-        return ` <h1>Email:${email}</h1>
+      .map(({ id, email, nickname, password }) => {
+        return `
+        <h1>Email:${email}</h1>
       <h1> Nickname:${nickname}</h1>
      <h1> password:${password}</h1>
-     <button>DELETE</button>
+     <button id="${id}" class="deleteButton">DELETE</button>
       `;
       })
       .join('');
@@ -25,4 +26,16 @@ const makeMarkUp = async evt => {
   }
 };
 
+document.body.addEventListener('click', deleteClick);
+
+async function deleteClick(evt) {
+  if (!evt.target.classList.contains('deleteButton')) return;
+  const deleteElementId = evt.target.id;
+  await deleteUser(deleteElementId);
+  document.body.innerHTML = '';
+  makeMarkUp();
+}
+
 document.addEventListener('DOMContentLoaded', makeMarkUp);
+
+takeFlowers();

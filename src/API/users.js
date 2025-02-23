@@ -7,3 +7,7 @@ export const takeUsers = async () => {
 
   return data;
 };
+
+export const deleteUser = async id => {
+  await axios.delete(`https://67b99a8651192bd378dde12d.mockapi.io/users/${id}`);
+};

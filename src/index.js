@@ -1,39 +1,34 @@
-import { deleteUser, takeUsers } from './API/users';
+import { getPosts } from './API/API';
 
-// async await - async - робить вашу функцію асинхроною
-//await - почекати виконання
-// try catch - try  - спробувати виконати код всередині блоку якщо не вийщло передати управлдіння у блок catch
-// catch - ловить помилки та відпрацьовує їх
+const section = document.querySelector('#render');
+const LOAD_MORE_BUTTON = document.getElementById('load');
 
-const makeMarkUp = async evt => {
-  try {
-    const users = await takeUsers();
+let page = 1;
 
-    const markUp = users
-      .map(({ id, email, nickname, password }) => {
+async function makeHTML(page) {
+  const data = await getPosts(page);
+
+  console.log(data);
+  const html =
+    data &&
+    data
+      .map(({ id, body, email, name }) => {
         return `
-        <h1>Email:${email}</h1>
-      <h1> Nickname:${nickname}</h1>
-     <h1> password:${password}</h1>
-     <button id="${id}" class="deleteButton">DELETE</button>
+      <div id="${id}">
+   <p>${body}</p>
+   <p>${email}</p>
+    <p>${name}</p>
+
+    </div>
       `;
       })
       .join('');
-
-    document.body.insertAdjacentHTML('beforeend', markUp);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-document.body.addEventListener('click', deleteClick);
-
-async function deleteClick(evt) {
-  if (!evt.target.classList.contains('deleteButton')) return;
-  const deleteElementId = evt.target.id;
-  await deleteUser(deleteElementId);
-  document.body.innerHTML = '';
-  makeMarkUp();
+  section.innerHTML = html;
 }
 
-document.addEventListener('DOMContentLoaded', makeMarkUp);
+console.log(makeHTML());
+
+LOAD_MORE_BUTTON.addEventListener('click', async () => {
+  page++;
+  await makeHTML(page);
+});
